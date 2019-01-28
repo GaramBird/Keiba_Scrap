@@ -76,10 +76,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.vb" />
-    <Compile Include="Form1.vb" />
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="Scrap.vb" />
+    <Compile Include="ShowForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowForm.Designer.vb">
+      <DependentUpon>ShowForm.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />

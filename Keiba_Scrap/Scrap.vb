@@ -1,6 +1,6 @@
 ﻿'競馬スクレイピングクラス
 
-Public Class Class1
+Public Class Scrap
 
 
 End Class

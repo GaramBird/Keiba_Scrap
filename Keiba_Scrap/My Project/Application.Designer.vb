@@ -32,7 +32,7 @@ Namespace My
 
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()> _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.Keiba_Scrap.ShowFram
+            Me.MainForm = Global.Keiba_Scrap.ShowForm
         End Sub
     End Class
 End Namespace
