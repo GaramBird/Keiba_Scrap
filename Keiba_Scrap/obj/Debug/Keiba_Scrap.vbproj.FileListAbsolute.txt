@@ -1,0 +1,17 @@
+C:\Users\Bird\source\vb.net\Keiba_Scrap\Keiba_Scrap\bin\Debug\Keiba_Scrap.exe.config
+C:\Users\Bird\source\vb.net\Keiba_Scrap\Keiba_Scrap\bin\Debug\Keiba_Scrap.exe
+C:\Users\Bird\source\vb.net\Keiba_Scrap\Keiba_Scrap\bin\Debug\Keiba_Scrap.pdb
+C:\Users\Bird\source\vb.net\Keiba_Scrap\Keiba_Scrap\bin\Debug\Keiba_Scrap.xml
+C:\Users\Bird\source\vb.net\Keiba_Scrap\Keiba_Scrap\bin\Debug\HtmlAgilityPack.dll
+C:\Users\Bird\source\vb.net\Keiba_Scrap\Keiba_Scrap\bin\Debug\Oracle.DataAccess.dll
+C:\Users\Bird\source\vb.net\Keiba_Scrap\Keiba_Scrap\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\Bird\source\vb.net\Keiba_Scrap\Keiba_Scrap\bin\Debug\HtmlAgilityPack.xml
+C:\Users\Bird\source\vb.net\Keiba_Scrap\Keiba_Scrap\obj\Debug\Keiba_Scrap.vbprojAssemblyReference.cache
+C:\Users\Bird\source\vb.net\Keiba_Scrap\Keiba_Scrap\obj\Debug\Keiba_Scrap.Resources.resources
+C:\Users\Bird\source\vb.net\Keiba_Scrap\Keiba_Scrap\obj\Debug\Keiba_Scrap.ShowForm.resources
+C:\Users\Bird\source\vb.net\Keiba_Scrap\Keiba_Scrap\obj\Debug\Keiba_Scrap.vbproj.GenerateResource.cache
+C:\Users\Bird\source\vb.net\Keiba_Scrap\Keiba_Scrap\obj\Debug\Keiba_Scrap.vbproj.CoreCompileInputs.cache
+C:\Users\Bird\source\vb.net\Keiba_Scrap\Keiba_Scrap\obj\Debug\Keiba_Scrap.vbproj.CopyComplete
+C:\Users\Bird\source\vb.net\Keiba_Scrap\Keiba_Scrap\obj\Debug\Keiba_Scrap.exe
+C:\Users\Bird\source\vb.net\Keiba_Scrap\Keiba_Scrap\obj\Debug\Keiba_Scrap.xml
+C:\Users\Bird\source\vb.net\Keiba_Scrap\Keiba_Scrap\obj\Debug\Keiba_Scrap.pdb
