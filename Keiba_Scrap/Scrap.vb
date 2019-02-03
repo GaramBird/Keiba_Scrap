@@ -35,8 +35,8 @@ Public Class Scrap
         objDOC.LoadHtml(sHTML)
 
         'テーブル走査を行う。
-        For Each row In objDOC.DocumentNode.SelectNodes("//table[@class=""race_table_01 nk_tb_common shutuba_table""]")
-            Dim Nodes = row.SelectNodes("tr/td[@class=""umaban""]")
+        For Each row In objDOC.DocumentNode.SelectNodes("//table[@class=""race_table_01 nk_tb_common shutuba_table""]/tr/td")
+            Dim Nodes = row.SelectNodes("td/span[@class=""umaban""]").Item(0)
             h_umaban.Add(Integer.Parse(Nodes.ToString()))
 
         Next
