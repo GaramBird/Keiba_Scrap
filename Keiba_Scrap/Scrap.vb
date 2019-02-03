@@ -41,12 +41,22 @@ Public Class Scrap
 
         For Each temp_h_umaban In h_umaban
             For Each row In objDOC.DocumentNode.SelectNodes("//table[@class=""race_table_01 nk_tb_common shutuba_table""]/tr[" & temp_h_umaban + 1 & "]")
-                h_name.Add(row.SelectNodes("//td/span[@class=""h_name""]/a").Item(0).InnerText)
+                h_name.Add(row.SelectNodes("//td/span[@class=""h_name""]/a").Item(temp_h_umaban - 1).InnerText)
 
+                Dim h_smaller() = Split(row.SelectNodes("//td/span[@class=""txt_smaller""]").Item(temp_h_umaban - 1).InnerText, vbLf)
+                h_smaller_father.Add(h_smaller(1))
+                h_smaller_mother.Add(h_smaller(2))
 
-                Dim h_smaller() = Split(row.SelectNodes("//td/span[@class=""txt_smaller""]").Item(0).InnerText, "ゴ")
-                h_smaller_father.Add(h_smaller(0))
-                h_smaller_mother.Add(h_smaller(1))
+                h_weight.Add(row.SelectNodes("//td/strong[@class=""weight""]").Item(temp_h_umaban - 1).InnerText)
+
+                Dim kinryo() = Split(row.SelectNodes("//td[8]").Item(temp_h_umaban - 1).InnerText, vbLf)
+                h_age.Add(kinryo(0))
+                h_kinryou.Add(kinryo(1))
+                h_kisyu.Add(kinryo(2))
+
+                Dim oz() = Split(row.SelectNodes("//td[9]").Item(temp_h_umaban - 1).InnerText, vbLf)
+                h_oz.Add(oz(0))
+                h_ninki.Add(oz(1))
             Next
 
         Next
