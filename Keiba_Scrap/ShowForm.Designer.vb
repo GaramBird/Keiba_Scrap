@@ -27,7 +27,7 @@ Partial Class ShowForm
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(382, 85)
+        Me.Button1.Location = New System.Drawing.Point(12, 12)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 0
@@ -38,7 +38,7 @@ Partial Class ShowForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(116, 38)
         Me.Controls.Add(Me.Button1)
         Me.Name = "ShowForm"
         Me.Text = "Form1"
