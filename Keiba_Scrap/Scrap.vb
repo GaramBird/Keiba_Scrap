@@ -35,19 +35,16 @@ Public Class Scrap
         objDOC.LoadHtml(sHTML)
 
         'テーブル走査を行う。
-        For Each row In objDOC.DocumentNode.SelectNodes("//table[@class=""race_table_01 nk_tb_common shutuba_table""]/tr/td")
-            Dim Nodes = row.SelectNodes("td/span[@class=""umaban""]").Item(0)
-            h_umaban.Add(Integer.Parse(Nodes.ToString()))
-
+        For Each row In objDOC.DocumentNode.SelectNodes("//table[@class=""race_table_01 nk_tb_common shutuba_table""]/tr/td[@class=""umaban""]")
+            h_umaban.Add(Integer.Parse(row.InnerText))
         Next
 
         For Each temp_h_umaban In h_umaban
             For Each row In objDOC.DocumentNode.SelectNodes("//table[@class=""race_table_01 nk_tb_common shutuba_table""]/tr[" & temp_h_umaban + 1 & "]")
-                Dim h_Nodes As HtmlAgilityPack.HtmlNodeCollection = row.SelectNodes("//td/span[@class=""h_name""]/a")
-                h_name.Add(h_Nodes.ToString())
+                h_name.Add(row.SelectNodes("//td/span[@class=""h_name""]/a").Item(0).InnerText)
 
-                Dim Nodes As HtmlAgilityPack.HtmlNodeCollection = row.SelectNodes("//td/span[@class=""txt_smaller""]")
-                Dim h_smaller = Split(Nodes.ToString(), "<br>")
+
+                Dim h_smaller() = Split(row.SelectNodes("//td/span[@class=""txt_smaller""]").Item(0).InnerText, "ゴ")
                 h_smaller_father.Add(h_smaller(0))
                 h_smaller_mother.Add(h_smaller(1))
             Next

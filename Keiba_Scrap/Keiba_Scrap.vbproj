@@ -5,12 +5,12 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{259281FC-FAF0-4007-853E-2747C96F1BCB}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <StartupObject>Keiba_Scrap.My.MyApplication</StartupObject>
+    <OutputType>Exe</OutputType>
+    <StartupObject>Sub Main</StartupObject>
     <RootNamespace>Keiba_Scrap</RootNamespace>
     <AssemblyName>Keiba_Scrap</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>WindowsForms</MyType>
+    <MyType>Console</MyType>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBaccess.vb" />
+    <Compile Include="Module1.vb" />
     <Compile Include="Scrap.vb" />
     <Compile Include="ShowForm.vb">
       <SubType>Form</SubType>

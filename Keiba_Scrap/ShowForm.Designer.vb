@@ -38,7 +38,7 @@ Partial Class ShowForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(116, 38)
+        Me.ClientSize = New System.Drawing.Size(407, 185)
         Me.Controls.Add(Me.Button1)
         Me.Name = "ShowForm"
         Me.Text = "Form1"
