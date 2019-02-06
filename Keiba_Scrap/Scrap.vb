@@ -60,7 +60,6 @@ Public Class Scrap
             Next
 
         Next
-
     End Sub
 
 

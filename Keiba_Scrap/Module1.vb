@@ -7,11 +7,10 @@ Module Module1
     Public Sub main()
 
         con.dbaccess_Open()
-        showform.ShowDialog()
 
         a.Scraping()
 
-
+        showform.ShowDialog()
         showform.Dispose()
         con.dbaccdess_Close()
 

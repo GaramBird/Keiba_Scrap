@@ -36,6 +36,28 @@ Public Class DBaccess
     End Function
 
 
+    Public Function DbCommit() As Boolean
+        Dim oraTran As OracleTransaction
+        Try
+            oraTran.Commit()
+            Return True
+        Catch ex As Exception
+            MessageBox.Show("データベースアクセスエラー")
+            Return False
+        End Try
+    End Function
+
+    Public Function DbRollback() As Boolean
+        Dim oraTran As OracleTransaction
+        Try
+            oraTran.Rollback()
+            Return True
+        Catch ex As Exception
+            MessageBox.Show("データベースアクセスエラー")
+            Return False
+        End Try
+    End Function
+
     Private Function DbOpen(ByVal constr As String) As Boolean
         Dim oraCon As OracleConnection
         oraCon = New OracleConnection(constr)
@@ -71,28 +93,5 @@ Public Class DBaccess
             Return False
         End Try
     End Function
-
-    Public Function DbCommit() As Boolean
-        Dim oraTran As OracleTransaction
-        Try
-            oraTran.Commit()
-            Return True
-        Catch ex As Exception
-            MessageBox.Show("データベースアクセスエラー")
-            Return False
-        End Try
-    End Function
-
-    Public Function DbRollback() As Boolean
-        Dim oraTran As OracleTransaction
-        Try
-            oraTran.Rollback()
-            Return True
-        Catch ex As Exception
-            MessageBox.Show("データベースアクセスエラー")
-            Return False
-        End Try
-    End Function
-
 
 End Class
