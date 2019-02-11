@@ -34,6 +34,7 @@ Public Class SyutubahyouScrap
         Dim iti_wether As New List(Of String)
         Dim iti_juni As New List(Of Integer)
         Dim iti_time As New List(Of TimeSpan)
+        Dim iti_weight As New List(Of Integer)
         Dim iti_noboriharon As New List(Of TimeSpan)
 
 
@@ -48,6 +49,7 @@ Public Class SyutubahyouScrap
         Dim ni_wether As New List(Of String)
         Dim ni_juni As New List(Of Integer)
         Dim ni_time As New List(Of TimeSpan)
+        Dim ni_weight As New List(Of Integer)
         Dim ni_noboriharon As New List(Of TimeSpan)
 
         '3走前情報変数コレクション
@@ -61,6 +63,7 @@ Public Class SyutubahyouScrap
         Dim san_wether As New List(Of String)
         Dim san_juni As New List(Of Integer)
         Dim san_time As New List(Of TimeSpan)
+        Dim san_weight As New List(Of Integer)
         Dim san_noboriharon As New List(Of TimeSpan)
 
         '4走前情報変数コレクション
@@ -74,6 +77,7 @@ Public Class SyutubahyouScrap
         Dim yon_wether As New List(Of String)
         Dim yon_juni As New List(Of Integer)
         Dim yon_time As New List(Of TimeSpan)
+        Dim yon_weight As New List(Of Integer)
         Dim yon_noboriharon As New List(Of TimeSpan)
 
         '5走前情報変数コレクション
@@ -87,6 +91,7 @@ Public Class SyutubahyouScrap
         Dim go_wether As New List(Of String)
         Dim go_juni As New List(Of Integer)
         Dim go_time As New List(Of TimeSpan)
+        Dim go_weight As New List(Of Integer)
         Dim go_noboriharon As New List(Of TimeSpan)
 
         'URL情報の操作オブジェクト
@@ -163,6 +168,8 @@ Public Class SyutubahyouScrap
                 h_smaller_mother.Add(h_smaller(2))
 
                 Select Case Split(row.SelectNodes("//td[" & 4 + colyosousiCount & "]/img").Item(sansho_umaban).OuterHtml, "horse_race_type")(1).Substring(0, 2)
+                    Case "00"   '逃げ
+                        h_reg_type.Add("データなし")
                     Case "01"   '逃げ
                         h_reg_type.Add("逃げ")
                     Case "02"   '先行
@@ -173,9 +180,10 @@ Public Class SyutubahyouScrap
                         h_reg_type.Add("追込")
                 End Select
 
+                '体重を取得
                 h_weight.Add(Split(row.SelectNodes("//td/strong[@class=""weight""]").Item(sansho_umaban).InnerText, "(")(0))    '前走から計算するので±値は考慮しない事にする。
 
-
+                '斤量（性別、歳、経路、斤量、機種）を取得
                 Dim kinryo() = Split(row.SelectNodes("//td[" & 5 + colyosousiCount & "]").Item(sansho_umaban).InnerText, vbLf)
                 h_sex.Add(kinryo(0).Substring(0, 1))
                 h_age.Add(reg_int.Replace(kinryo(0), ""))
@@ -183,6 +191,7 @@ Public Class SyutubahyouScrap
                 h_kinryou.Add(kinryo(1))
                 h_kisyu.Add(kinryo(2))
 
+                'オッズ、人気を取得
                 Dim oz() = Split(row.SelectNodes("//td[" & 6 + colyosousiCount & "]").Item(sansho_umaban).InnerText, vbLf)
                 h_oz.Add(oz(1))
                 h_ninki.Add(reg_int.Replace(oz(2), ""))
@@ -194,11 +203,11 @@ Public Class SyutubahyouScrap
                     '1走前レース情報をリンクから取得する。
                     Dim itisoumae_info = row.SelectNodes("//td[" & 7 + colyosousiCount & "]/div[@class=""inner""]/div[@class=""racebox""]/span[@class=""race_name""]/a").Item(sansho_umaban - itisoumae_count)
                     Dim itisoumae_race_url = itisoumae_info.Attributes("href").Value.Trim()
-                    Call getinfo.GetAgoRaceInfo(h_name(sansho_umaban), itisoumae_race_url, iti_racename, iti_nagasa, iti_kaisaibi, iti_basho, iti_baba, iti_baba_status, iti_wether, iti_juni, iti_time)
+                    Call getinfo.GetAgoRaceInfo(h_name(sansho_umaban), itisoumae_race_url, iti_racename, iti_nagasa, iti_kaisaibi, iti_basho, iti_baba, iti_baba_status, iti_wether, iti_juni, iti_time, iti_weight)
                 Else
                     'レース情報（<a>タグ）がない場合の処理、休養は直近の出場レースから日時を取得するので考慮しないものとする。
                     itisoumae_count += 1
-                    Call getinfo.NULLAgoRaceInfo(iti_racename, iti_nagasa, iti_kaisaibi, iti_basho, iti_baba, iti_baba_status, iti_wether, iti_juni, iti_time)
+                    Call getinfo.NULLAgoRaceInfo(iti_racename, iti_nagasa, iti_kaisaibi, iti_basho, iti_baba, iti_baba_status, iti_wether, iti_juni, iti_time, iti_weight)
                 End If
 
 
@@ -209,11 +218,11 @@ Public Class SyutubahyouScrap
                     '2走前レース情報をリンクから取得する。
                     Dim nisoumae_info = row.SelectNodes("//td[" & 8 + colyosousiCount & "]/div[@class=""inner""]/div[@class=""racebox""]/span[@class=""race_name""]/a").Item(sansho_umaban - nisoumae_count)
                     Dim nisoumae_race_url = nisoumae_info.Attributes("href").Value.Trim()
-                    Call getinfo.GetAgoRaceInfo(h_name(sansho_umaban), nisoumae_race_url, ni_racename, ni_nagasa, ni_kaisaibi, ni_basho, ni_baba, ni_baba_status, ni_wether, ni_juni, ni_time)
+                    Call getinfo.GetAgoRaceInfo(h_name(sansho_umaban), nisoumae_race_url, ni_racename, ni_nagasa, ni_kaisaibi, ni_basho, ni_baba, ni_baba_status, ni_wether, ni_juni, ni_time, ni_weight)
                 Else
                     'レース情報（<a>タグ）がない場合の処理、休養は直近の出場レースから日時を取得するので考慮しないものとする。
                     nisoumae_count += 1
-                    Call getinfo.NULLAgoRaceInfo(ni_racename, ni_nagasa, ni_kaisaibi, ni_basho, ni_baba, ni_baba_status, ni_wether, ni_juni, ni_time)
+                    Call getinfo.NULLAgoRaceInfo(ni_racename, ni_nagasa, ni_kaisaibi, ni_basho, ni_baba, ni_baba_status, ni_wether, ni_juni, ni_time, ni_weight)
                 End If
 
 
@@ -224,11 +233,11 @@ Public Class SyutubahyouScrap
                     '3走前レース情報をリンクから取得する。
                     Dim sansoumae_info = row.SelectNodes("//td[" & 9 + colyosousiCount & "]/div[@class=""inner""]/div[@class=""racebox""]/span[@class=""race_name""]/a").Item(sansho_umaban - sansoumae_count)
                     Dim sansoumae_race_url = sansoumae_info.Attributes("href").Value.Trim()
-                    Call getinfo.GetAgoRaceInfo(h_name(sansho_umaban), sansoumae_race_url, san_racename, san_nagasa, san_kaisaibi, san_basho, san_baba, san_baba_status, san_wether, san_juni, san_time)
+                    Call getinfo.GetAgoRaceInfo(h_name(sansho_umaban), sansoumae_race_url, san_racename, san_nagasa, san_kaisaibi, san_basho, san_baba, san_baba_status, san_wether, san_juni, san_time, san_weight)
                 Else
                     'レース情報（<a>タグ）がない場合の処理、休養は直近の出場レースから日時を取得するので考慮しないものとする。
                     sansoumae_count += 1
-                    Call getinfo.NULLAgoRaceInfo(san_racename, san_nagasa, san_kaisaibi, san_basho, san_baba, san_baba_status, san_wether, san_juni, san_time)
+                    Call getinfo.NULLAgoRaceInfo(san_racename, san_nagasa, san_kaisaibi, san_basho, san_baba, san_baba_status, san_wether, san_juni, san_time, san_weight)
                 End If
 
 
@@ -239,11 +248,11 @@ Public Class SyutubahyouScrap
                     '4走前レース情報をリンクから取得する。
                     Dim yonsoumae_info = row.SelectNodes("//td[" & 10 + colyosousiCount & "]/div[@class=""inner""]/div[@class=""racebox""]/span[@class=""race_name""]/a").Item(sansho_umaban - yonsoumae_count)
                     Dim yonsoumae_race_url = yonsoumae_info.Attributes("href").Value.Trim()
-                    Call getinfo.GetAgoRaceInfo(h_name(sansho_umaban), yonsoumae_race_url, yon_racename, yon_nagasa, yon_kaisaibi, yon_basho, yon_baba, yon_baba_status, yon_wether, yon_juni, yon_time)
+                    Call getinfo.GetAgoRaceInfo(h_name(sansho_umaban), yonsoumae_race_url, yon_racename, yon_nagasa, yon_kaisaibi, yon_basho, yon_baba, yon_baba_status, yon_wether, yon_juni, yon_time, yon_weight)
                 Else
                     'レース情報（<a>タグ）がない場合の処理、休養は直近の出場レースから日時を取得するので考慮しないものとする。
                     yonsoumae_count += 1
-                    Call getinfo.NULLAgoRaceInfo(yon_racename, yon_nagasa, yon_kaisaibi, yon_basho, yon_baba, yon_baba_status, yon_wether, yon_juni, yon_time)
+                    Call getinfo.NULLAgoRaceInfo(yon_racename, yon_nagasa, yon_kaisaibi, yon_basho, yon_baba, yon_baba_status, yon_wether, yon_juni, yon_time, yon_weight)
                 End If
 
 
@@ -254,11 +263,11 @@ Public Class SyutubahyouScrap
                     '5走前レース情報をリンクから取得する。
                     Dim gosoumae_info = row.SelectNodes("//td[" & 11 + colyosousiCount & "]/div[@class=""inner""]/div[@class=""racebox""]/span[@class=""race_name""]/a").Item(sansho_umaban - gosoumae_count)
                     Dim gosoumae_race_url = gosoumae_info.Attributes("href").Value.Trim()
-                    Call getinfo.GetAgoRaceInfo(h_name(sansho_umaban), gosoumae_race_url, go_racename, go_nagasa, go_kaisaibi, go_basho, go_baba, go_baba_status, go_wether, go_juni, go_time)
+                    Call getinfo.GetAgoRaceInfo(h_name(sansho_umaban), gosoumae_race_url, go_racename, go_nagasa, go_kaisaibi, go_basho, go_baba, go_baba_status, go_wether, go_juni, go_time, go_weight)
                 Else
                     'レース情報（<a>タグ）がない場合の処理、休養は直近の出場レースから日時を取得するので考慮しないものとする。
                     gosoumae_count += 1
-                    Call getinfo.NULLAgoRaceInfo(go_racename, go_nagasa, go_kaisaibi, go_basho, go_baba, go_baba_status, go_wether, go_juni, go_time)
+                    Call getinfo.NULLAgoRaceInfo(go_racename, go_nagasa, go_kaisaibi, go_basho, go_baba, go_baba_status, go_wether, go_juni, go_time, go_weight)
                 End If
 
             Next
@@ -295,6 +304,7 @@ Public Class SyutubahyouScrap
         dt.Columns.Add("1走前天気", GetType(String))
         dt.Columns.Add("1走前順位", GetType(Integer))
         dt.Columns.Add("1走前タイム", GetType(TimeSpan))
+        dt.Columns.Add("1走前体重", GetType(Integer))
         dt.Columns.Add("2走前レース名", GetType(String))
         dt.Columns.Add("2走前長さ", GetType(Integer))
         dt.Columns.Add("2走前開催日", GetType(DateTime))
@@ -304,6 +314,7 @@ Public Class SyutubahyouScrap
         dt.Columns.Add("2走前天気", GetType(String))
         dt.Columns.Add("2走前順位", GetType(Integer))
         dt.Columns.Add("2走前タイム", GetType(TimeSpan))
+        dt.Columns.Add("2走前体重", GetType(Integer))
         dt.Columns.Add("3走前レース名", GetType(String))
         dt.Columns.Add("3走前長さ", GetType(Integer))
         dt.Columns.Add("3走前開催日", GetType(DateTime))
@@ -313,6 +324,7 @@ Public Class SyutubahyouScrap
         dt.Columns.Add("3走前天気", GetType(String))
         dt.Columns.Add("3走前順位", GetType(Integer))
         dt.Columns.Add("3走前タイム", GetType(TimeSpan))
+        dt.Columns.Add("3走前体重", GetType(Integer))
         dt.Columns.Add("4走前レース名", GetType(String))
         dt.Columns.Add("4走前長さ", GetType(Integer))
         dt.Columns.Add("4走前開催日", GetType(DateTime))
@@ -322,6 +334,7 @@ Public Class SyutubahyouScrap
         dt.Columns.Add("4走前天気", GetType(String))
         dt.Columns.Add("4走前順位", GetType(Integer))
         dt.Columns.Add("4走前タイム", GetType(TimeSpan))
+        dt.Columns.Add("4走前体重", GetType(Integer))
         dt.Columns.Add("5走前レース名", GetType(String))
         dt.Columns.Add("5走前長さ", GetType(Integer))
         dt.Columns.Add("5走前開催日", GetType(DateTime))
@@ -331,9 +344,15 @@ Public Class SyutubahyouScrap
         dt.Columns.Add("5走前天気", GetType(String))
         dt.Columns.Add("5走前順位", GetType(Integer))
         dt.Columns.Add("5走前タイム", GetType(TimeSpan))
+        dt.Columns.Add("5走前体重", GetType(Integer))
 
         For i = 0 To h_umaban.Count - 1
-            dt.Rows.Add(h_umaban(i), h_name(i), h_smaller_father(i), h_smaller_mother(i), h_reg_type(i), h_weight(i), h_sex(i), h_age(i), h_keiro(i), h_kinryou(i), h_kisyu(i), h_oz(i), h_ninki(i), iti_racename(i), iti_nagasa(i), iti_kaisaibi(i), iti_basho(i), iti_baba(i), iti_baba_status(i), iti_wether(i), iti_juni(i), iti_time(i), ni_racename(i), ni_nagasa(i), ni_kaisaibi(i), ni_basho(i), ni_baba(i), ni_baba_status(i), ni_wether(i), ni_juni(i), ni_time(i), san_racename(i), san_nagasa(i), san_kaisaibi(i), san_basho(i), san_baba(i), san_baba_status(i), san_wether(i), san_juni(i), san_time(i), yon_racename(i), yon_nagasa(i), yon_kaisaibi(i), yon_basho(i), yon_baba(i), yon_baba_status(i), yon_wether(i), yon_juni(i), yon_time(i), go_racename(i), go_nagasa(i), go_kaisaibi(i), go_basho(i), go_baba(i), go_baba_status(i), go_wether(i), go_juni(i), go_time(i))
+            dt.Rows.Add(h_umaban(i), h_name(i), h_smaller_father(i), h_smaller_mother(i), h_reg_type(i), h_weight(i), h_sex(i), h_age(i), h_keiro(i), h_kinryou(i), h_kisyu(i), h_oz(i), h_ninki(i),
+                        iti_racename(i), iti_nagasa(i), iti_kaisaibi(i), iti_basho(i), iti_baba(i), iti_baba_status(i), iti_wether(i), iti_juni(i), iti_time(i), iti_weight(i),
+                        ni_racename(i), ni_nagasa(i), ni_kaisaibi(i), ni_basho(i), ni_baba(i), ni_baba_status(i), ni_wether(i), ni_juni(i), ni_time(i), ni_weight(i),
+                        san_racename(i), san_nagasa(i), san_kaisaibi(i), san_basho(i), san_baba(i), san_baba_status(i), san_wether(i), san_juni(i), san_time(i), san_weight(i),
+                        yon_racename(i), yon_nagasa(i), yon_kaisaibi(i), yon_basho(i), yon_baba(i), yon_baba_status(i), yon_wether(i), yon_juni(i), yon_time(i), yon_weight(i),
+                        go_racename(i), go_nagasa(i), go_kaisaibi(i), go_basho(i), go_baba(i), go_baba_status(i), go_wether(i), go_juni(i), go_time(i), go_weight(i))
         Next
         ShowForm.ShowFormInstance.DataGridSet = dt
 #End Region

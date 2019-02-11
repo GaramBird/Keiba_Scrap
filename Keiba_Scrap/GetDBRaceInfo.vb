@@ -3,7 +3,7 @@ Imports System.Text.RegularExpressions
 
 Public Class GetDBRaceInfo
 
-    Public Function NULLAgoRaceInfo(ByRef racename As List(Of String), ByRef nagasa As List(Of Integer), ByRef kaisaibi As List(Of DateTime), ByRef basho As List(Of String), ByRef baba As List(Of String), ByRef baba_status As List(Of String), ByRef wether As List(Of String), ByRef juni As List(Of Integer), ByRef time As List(Of TimeSpan)) As Boolean
+    Public Function NULLAgoRaceInfo(ByRef racename As List(Of String), ByRef nagasa As List(Of Integer), ByRef kaisaibi As List(Of DateTime), ByRef basho As List(Of String), ByRef baba As List(Of String), ByRef baba_status As List(Of String), ByRef wether As List(Of String), ByRef juni As List(Of Integer), ByRef time As List(Of TimeSpan), ByRef weight As List(Of Integer)) As Boolean
         racename.Add(Nothing)
         baba.Add(Nothing)
         nagasa.Add(Nothing)
@@ -13,13 +13,14 @@ Public Class GetDBRaceInfo
         basho.Add(Nothing)
         juni.Add(Nothing)
         time.Add(Nothing)
+        weight.Add(Nothing)
 
         Return True
     End Function
 
 
 
-    Public Function GetAgoRaceInfo(ByVal name As String, ByVal sURL As String, ByRef racename As List(Of String), ByRef nagasa As List(Of Integer), ByRef kaisaibi As List(Of DateTime), ByRef basho As List(Of String), ByRef baba As List(Of String), ByRef baba_status As List(Of String), ByRef wether As List(Of String), ByRef juni As List(Of Integer), ByRef time As List(Of TimeSpan)) As Boolean
+    Public Function GetAgoRaceInfo(ByVal name As String, ByVal sURL As String, ByRef racename As List(Of String), ByRef nagasa As List(Of Integer), ByRef kaisaibi As List(Of DateTime), ByRef basho As List(Of String), ByRef baba As List(Of String), ByRef baba_status As List(Of String), ByRef wether As List(Of String), ByRef juni As List(Of Integer), ByRef time As List(Of TimeSpan), ByRef weight As List(Of Integer)) As Boolean
         '正規表現
         Dim reg_int As New Regex("[^0-9]")  '数字のみを抽出に使用
 
@@ -69,7 +70,7 @@ Public Class GetDBRaceInfo
         If reg_int.Replace(race_objDOC.DocumentNode.SelectNodes("//table[@class=""race_table_01 nk_tb_common""]/tr/td[1]").Item(sanshouNo).InnerText, "") <> "" Then
             juni.Add(Integer.Parse(race_objDOC.DocumentNode.SelectNodes("//table[@class=""race_table_01 nk_tb_common""]/tr/td[1]").Item(sanshouNo).InnerText))
         Else
-            juni.Add(99)
+            juni.Add(99)   '中止などの場合はダミー値の99とする。
         End If
 
         'レースタイムを取得する
@@ -80,9 +81,12 @@ Public Class GetDBRaceInfo
             Dim ts = New TimeSpan(0, 0, minits(0), seconds(0), miliseconds)
             time.Add(ts)
         Else
-            Dim ts2 = New TimeSpan(0, 0, 0, 0, 0)
-            time.Add(ts2)
+            time.Add(Nothing)
         End If
+
+        '体重を取得
+        weight.Add(Split(race_objDOC.DocumentNode.SelectNodes("//table[@class=""race_table_01 nk_tb_common""]/tr/td[12]").Item(sanshouNo).InnerText, "(")(0))
+
 
         Return True
     End Function

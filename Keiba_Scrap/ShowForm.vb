@@ -61,7 +61,7 @@
 
         If txtSyutubahyouURL.Text <> "" Then
             If txtSyutubahyouURL.Text.IndexOf("race.netkeiba.com") >= 0 And txtSyutubahyouURL.Text.Substring(txtSyutubahyouURL.Text.Length - 12) = "mode=shutuba" Then
-                Me.dgvSyutubahyou.DataSource = Nothing
+                DataGridSet = Nothing
                 Me.dgvSyutubahyou.Refresh()
                 scrap.Scraping(txtSyutubahyouURL.Text)  'スクレイピングを実行する。
 
