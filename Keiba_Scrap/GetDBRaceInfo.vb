@@ -3,6 +3,7 @@ Imports System.Text.RegularExpressions
 
 Public Class GetDBRaceInfo
 
+    '各前走情報にNothingを追加する。
     Public Function NULLAgoRaceInfo(ByRef racename As List(Of String), ByRef nagasa As List(Of Integer), ByRef kaisaibi As List(Of DateTime), ByRef basho As List(Of String), ByRef baba As List(Of String), ByRef baba_status As List(Of String), ByRef wether As List(Of String), ByRef juni As List(Of Integer), ByRef time As List(Of TimeSpan), ByRef weight As List(Of Integer)) As Boolean
         racename.Add(Nothing)
         baba.Add(Nothing)
@@ -19,7 +20,7 @@ Public Class GetDBRaceInfo
     End Function
 
 
-
+    '各前走情報を取得する。
     Public Function GetAgoRaceInfo(ByVal name As String, ByVal sURL As String, ByRef racename As List(Of String), ByRef nagasa As List(Of Integer), ByRef kaisaibi As List(Of DateTime), ByRef basho As List(Of String), ByRef baba As List(Of String), ByRef baba_status As List(Of String), ByRef wether As List(Of String), ByRef juni As List(Of Integer), ByRef time As List(Of TimeSpan), ByRef weight As List(Of Integer)) As Boolean
         '正規表現
         Dim reg_int As New Regex("[^0-9]")  '数字のみを抽出に使用
@@ -43,13 +44,14 @@ Public Class GetDBRaceInfo
             racename.Add(tempracename)
         End If
 
-
+        'レース馬場情報を取得する。
         Dim babainfo() = Split(raceinfo.SelectNodes("//dl[@class=""racedata fc""]/dd/diary_snap_cut/span").Item(0).InnerText.Replace("&nbsp;", "").Trim(), "/")
         baba.Add(babainfo(0).Substring(0, 1))
         nagasa.Add(reg_int.Replace(babainfo(0).Substring(0, babainfo(0).IndexOf("m")), ""))
         wether.Add(babainfo(1).Substring(babainfo(1).IndexOf(":") + 1))
         baba_status.Add(babainfo(2).Substring(babainfo(2).IndexOf(":") + 1))
 
+        'レース場所情報を取得する。
         Dim bashoinfo = raceinfo.SelectNodes("//p[@class=""smalltxt""]").Item(0).InnerText.Trim()
         Dim nen() = Split(bashoinfo, "年")
         Dim gatu() = Split(nen(1), "月")
@@ -58,7 +60,7 @@ Public Class GetDBRaceInfo
         basho.Add(bashoinfo.Substring(bashoinfo.IndexOf("回") + 1, bashoinfo.IndexOf("日目") - 2 - bashoinfo.IndexOf("回")))
 
         'レース結果情報を表から取得する。
-        '馬番を取得して出馬表から取得するナンバリングを取得する。
+        '取得する馬名を参照番号としてインデックス番号とする。
         Dim h_name As New List(Of String)
         Dim sanshouNo As Integer
         For Each row In race_objDOC.DocumentNode.SelectNodes("//table[@class=""race_table_01 nk_tb_common""]/tr/td[4]/a")

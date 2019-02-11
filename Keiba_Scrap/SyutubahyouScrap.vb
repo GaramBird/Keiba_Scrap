@@ -104,6 +104,7 @@ Public Class SyutubahyouScrap
         Dim syutubahyou_html As String
         Dim syutubahyou_objDOC As HtmlAgilityPack.HtmlDocument
 
+        'URLの取得検証
         Try
             syutubahyou_html = objWC.DownloadString(syutubahyou_url)
             syutubahyou_objDOC = New HtmlAgilityPack.HtmlDocument()
@@ -277,11 +278,12 @@ Public Class SyutubahyouScrap
         ShowForm.ShowFormInstance.JikkouBarValue = ShowForm.jikkouBar.Maximum    '実行ステータスバーを加算する。
         MessageBox.Show("出馬表のスクレイピングが完了しました。")
 
+
+#Region "スクレイピングデータテーブル"
         '取得したスクレイピングデータをデータグリッドビューのデータソースへとセットする。
         Dim ds = New DataSet("スクレイピングデータセット")
         Dim dt = New DataTable("スクレイピングデータテーブル")
 
-#Region "グリッドビュー設定"
         dt.Columns.Add("馬番", GetType(Integer))
         dt.Columns.Add("馬名", GetType(String))
         dt.Columns.Add("父", GetType(String))
@@ -354,8 +356,13 @@ Public Class SyutubahyouScrap
                         yon_racename(i), yon_nagasa(i), yon_kaisaibi(i), yon_basho(i), yon_baba(i), yon_baba_status(i), yon_wether(i), yon_juni(i), yon_time(i), yon_weight(i),
                         go_racename(i), go_nagasa(i), go_kaisaibi(i), go_basho(i), go_baba(i), go_baba_status(i), go_wether(i), go_juni(i), go_time(i), go_weight(i))
         Next
+#End Region
+
+
+#Region "グリッドビュー設定"
         ShowForm.ShowFormInstance.DataGridSet = dt
 #End Region
+
 
     End Sub
 
