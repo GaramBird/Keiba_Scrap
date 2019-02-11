@@ -54,7 +54,7 @@ Partial Class ShowForm
         '
         Me.jikkouBar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.jikkouBar.Location = New System.Drawing.Point(-3, 423)
+        Me.jikkouBar.Location = New System.Drawing.Point(-3, 524)
         Me.jikkouBar.Maximum = 150
         Me.jikkouBar.Name = "jikkouBar"
         Me.jikkouBar.Size = New System.Drawing.Size(863, 13)
@@ -65,11 +65,12 @@ Partial Class ShowForm
         Me.jikkoumethod.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.jikkoumethod.BackColor = System.Drawing.SystemColors.Control
-        Me.jikkoumethod.Location = New System.Drawing.Point(48, 403)
+        Me.jikkoumethod.Enabled = False
+        Me.jikkoumethod.Location = New System.Drawing.Point(61, 504)
         Me.jikkoumethod.Margin = New System.Windows.Forms.Padding(0)
         Me.jikkoumethod.Name = "jikkoumethod"
         Me.jikkoumethod.ReadOnly = True
-        Me.jikkoumethod.Size = New System.Drawing.Size(812, 19)
+        Me.jikkoumethod.Size = New System.Drawing.Size(799, 19)
         Me.jikkoumethod.TabIndex = 4
         Me.jikkoumethod.TabStop = False
         '
@@ -78,28 +79,30 @@ Partial Class ShowForm
         Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(2, 406)
+        Me.Label1.Location = New System.Drawing.Point(2, 507)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(47, 12)
+        Me.Label1.Size = New System.Drawing.Size(56, 12)
         Me.Label1.TabIndex = 5
-        Me.Label1.Text = "実行中："
+        Me.Label1.Text = "ステータス："
         '
         'dgvSyutubahyou
         '
+        Me.dgvSyutubahyou.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvSyutubahyou.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvSyutubahyou.Location = New System.Drawing.Point(22, 66)
+        Me.dgvSyutubahyou.Location = New System.Drawing.Point(22, 51)
         Me.dgvSyutubahyou.Name = "dgvSyutubahyou"
+        Me.dgvSyutubahyou.ReadOnly = True
         Me.dgvSyutubahyou.RowTemplate.Height = 21
-        Me.dgvSyutubahyou.Size = New System.Drawing.Size(824, 334)
+        Me.dgvSyutubahyou.Size = New System.Drawing.Size(824, 450)
         Me.dgvSyutubahyou.TabIndex = 6
         Me.dgvSyutubahyou.TabStop = False
         '
         'Label2
         '
-        Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(133, 4)
+        Me.Label2.Location = New System.Drawing.Point(133, 6)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(243, 12)
         Me.Label2.TabIndex = 7
@@ -109,7 +112,7 @@ Partial Class ShowForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(858, 438)
+        Me.ClientSize = New System.Drawing.Size(858, 539)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.dgvSyutubahyou)
         Me.Controls.Add(Me.Label1)

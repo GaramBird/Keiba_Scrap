@@ -1,6 +1,7 @@
 ﻿Public Class ShowForm
     Shared scrap As SyutubahyouScrap = New SyutubahyouScrap
 
+#Region "プロパティ"
     '別クラスから値を取得・設定するためのフィールドとプロパティ
     Private Shared _showforminstance As ShowForm
     Public Shared Property ShowFormInstance() As ShowForm
@@ -37,16 +38,17 @@
             dgvSyutubahyou.DataSource = Value
         End Set
     End Property
-
+#End Region
 
 
 
     'フォームロード（初期値設定）
     Private Sub Fromload(sender As Object, e As EventArgs) Handles MyBase.Load
-        JikkouMethodText = "処理なし"
+        JikkouMethodText = "初期画面"
         'Me.txtSyutubahyouURL.Text = "https://race.netkeiba.com/?pid=race&id=c201806050811&mode=shutuba"  '初期値サンプル
         Me.txtSyutubahyouURL.Text = "https://race.netkeiba.com/?pid=race&id=c201905010611&mode=shutuba"
         Me.dgvSyutubahyou.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+        Me.dgvSyutubahyou.SelectionMode = DataGridViewSelectionMode.FullRowSelect
     End Sub
 
 
@@ -58,7 +60,9 @@
 
 
         If txtSyutubahyouURL.Text <> "" Then
-            If txtSyutubahyouURL.Text.IndexOf("race.netkeiba.com") >= 0 And txtSyutubahyouURL.Text.IndexOf("mode=shutuba") >= 0 Then
+            If txtSyutubahyouURL.Text.IndexOf("race.netkeiba.com") >= 0 And txtSyutubahyouURL.Text.Substring(txtSyutubahyouURL.Text.Length - 12) = "mode=shutuba" Then
+                Me.dgvSyutubahyou.DataSource = Nothing
+                Me.dgvSyutubahyou.Refresh()
                 scrap.Scraping(txtSyutubahyouURL.Text)  'スクレイピングを実行する。
 
             Else
@@ -67,7 +71,9 @@
                 End If
             End If
         Else
-            MessageBox.Show("URLが入力されていません。")
+            If MessageBox.Show("URLが入力されていません。サイトを開きますか？", "確認", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+                System.Diagnostics.Process.Start("http://www.netkeiba.com/?rf=logo")
+            End If
         End If
 
         JikkouBarValue = 0

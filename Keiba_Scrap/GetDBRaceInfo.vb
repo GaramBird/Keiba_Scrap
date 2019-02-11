@@ -3,24 +3,23 @@ Imports System.Text.RegularExpressions
 
 Public Class GetDBRaceInfo
 
-    Public Function NULLAgoRaceInfo(ByRef racename As List(Of String), ByRef nagasa As List(Of String), ByRef kaisaibi As List(Of String), ByRef basho As List(Of String), ByRef baba As List(Of String), ByRef baba_status As List(Of String), ByRef wether As List(Of String), ByRef juni As List(Of String), ByRef time As List(Of TimeSpan)) As Boolean
-        racename.Add("")
-        baba.Add("")
-        nagasa.Add("")
-        wether.Add("")
-        baba_status.Add("")
-        kaisaibi.Add("")
-        basho.Add("")
-        juni.Add("")
-        Dim ts = New TimeSpan(0, 0, 0, 0, 0)
-        time.Add(ts)
+    Public Function NULLAgoRaceInfo(ByRef racename As List(Of String), ByRef nagasa As List(Of Integer), ByRef kaisaibi As List(Of DateTime), ByRef basho As List(Of String), ByRef baba As List(Of String), ByRef baba_status As List(Of String), ByRef wether As List(Of String), ByRef juni As List(Of Integer), ByRef time As List(Of TimeSpan)) As Boolean
+        racename.Add(Nothing)
+        baba.Add(Nothing)
+        nagasa.Add(Nothing)
+        wether.Add(Nothing)
+        baba_status.Add(Nothing)
+        kaisaibi.Add(Nothing)
+        basho.Add(Nothing)
+        juni.Add(Nothing)
+        time.Add(Nothing)
 
         Return True
     End Function
 
 
 
-    Public Function GetAgoRaceInfo(ByVal name As String, ByVal sURL As String, ByRef racename As List(Of String), ByRef nagasa As List(Of String), ByRef kaisaibi As List(Of String), ByRef basho As List(Of String), ByRef baba As List(Of String), ByRef baba_status As List(Of String), ByRef wether As List(Of String), ByRef juni As List(Of String), ByRef time As List(Of TimeSpan)) As Boolean
+    Public Function GetAgoRaceInfo(ByVal name As String, ByVal sURL As String, ByRef racename As List(Of String), ByRef nagasa As List(Of Integer), ByRef kaisaibi As List(Of DateTime), ByRef basho As List(Of String), ByRef baba As List(Of String), ByRef baba_status As List(Of String), ByRef wether As List(Of String), ByRef juni As List(Of Integer), ByRef time As List(Of TimeSpan)) As Boolean
         '正規表現
         Dim reg_int As New Regex("[^0-9]")  '数字のみを抽出に使用
 
@@ -54,7 +53,7 @@ Public Class GetDBRaceInfo
         Dim nen() = Split(bashoinfo, "年")
         Dim gatu() = Split(nen(1), "月")
         Dim niti() = Split(gatu(1), "日")
-        kaisaibi.Add(DateTime.Parse(nen(0) & "/" & gatu(0) & "/" & niti(0)))
+        kaisaibi.Add(DateTime.Parse((nen(0) & "/" & gatu(0) & "/" & niti(0))))
         basho.Add(bashoinfo.Substring(bashoinfo.IndexOf("回") + 1, bashoinfo.IndexOf("日目") - 2 - bashoinfo.IndexOf("回")))
 
         'レース結果情報を表から取得する。
@@ -70,7 +69,7 @@ Public Class GetDBRaceInfo
         If reg_int.Replace(race_objDOC.DocumentNode.SelectNodes("//table[@class=""race_table_01 nk_tb_common""]/tr/td[1]").Item(sanshouNo).InnerText, "") <> "" Then
             juni.Add(Integer.Parse(race_objDOC.DocumentNode.SelectNodes("//table[@class=""race_table_01 nk_tb_common""]/tr/td[1]").Item(sanshouNo).InnerText))
         Else
-            juni.Add(race_objDOC.DocumentNode.SelectNodes("//table[@class=""race_table_01 nk_tb_common""]/tr/td[1]").Item(sanshouNo).InnerText)
+            juni.Add(99)
         End If
 
         'レースタイムを取得する
