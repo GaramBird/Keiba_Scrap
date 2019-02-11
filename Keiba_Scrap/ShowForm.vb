@@ -78,4 +78,11 @@
     Private Sub jikkoumethod_TextChanged(sender As Object, e As EventArgs) Handles jikkoumethod.TextChanged
         Me.jikkoumethod.Refresh()
     End Sub
+
+
+    Private Sub txtSyutubahyouURL_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSyutubahyouURL.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Call btnGetSyutubahyou_Click(Me.btnGetSyutubahyou, e)
+        End If
+    End Sub
 End Class

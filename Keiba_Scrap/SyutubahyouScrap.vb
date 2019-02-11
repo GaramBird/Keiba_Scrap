@@ -197,7 +197,7 @@ Public Class SyutubahyouScrap
                 h_ninki.Add(reg_int.Replace(oz(2), ""))
 
                 '1走前レースがあったかの判定をする。（ないOR休養）その他のレースなし情報があれば条件を追加することにする。
-                ShowForm.ShowFormInstance.JikkouMethodText = h_name(sansho_umaban) & "1走前レース取得" '実行中の処理を記載する。
+                ShowForm.ShowFormInstance.JikkouMethodText = temp_h_umaban & "." & h_name(sansho_umaban) & "1走前レース取得" '実行中の処理を記載する。
                 If row.SelectNodes("//td[" & 7 + colyosousiCount & "]").Item(sansho_umaban).InnerHtml.IndexOf("<a") >= 0 Then
                     '1走前レース情報をリンクから取得する。
                     Dim itisoumae_info = row.SelectNodes("//td[" & 7 + colyosousiCount & "]/div[@class=""inner""]/div[@class=""racebox""]/span[@class=""race_name""]/a").Item(sansho_umaban - itisoumae_count)
@@ -211,7 +211,7 @@ Public Class SyutubahyouScrap
 
 
                 '2走前レースがあったかの判定をする。（ないOR休養）その他のレースなし情報があれば条件を追加することにする。
-                ShowForm.ShowFormInstance.JikkouMethodText = h_name(sansho_umaban) & "2走前レース取得" '実行中の処理を記載する。
+                ShowForm.ShowFormInstance.JikkouMethodText = temp_h_umaban & "." & h_name(sansho_umaban) & "2走前レース取得" '実行中の処理を記載する。
                 If row.SelectNodes("//td[" & 8 + colyosousiCount & "]").Item(sansho_umaban).InnerHtml.IndexOf("<a") >= 0 Then
                     '2走前レース情報をリンクから取得する。
                     Dim nisoumae_info = row.SelectNodes("//td[" & 8 + colyosousiCount & "]/div[@class=""inner""]/div[@class=""racebox""]/span[@class=""race_name""]/a").Item(sansho_umaban - nisoumae_count)
@@ -225,7 +225,7 @@ Public Class SyutubahyouScrap
 
 
                 '3走前レースがあったかの判定をする。（ないOR休養）その他のレースなし情報があれば条件を追加することにする。
-                ShowForm.ShowFormInstance.JikkouMethodText = h_name(sansho_umaban) & "3走前レース取得" '実行中の処理を記載する。
+                ShowForm.ShowFormInstance.JikkouMethodText = temp_h_umaban & "." & h_name(sansho_umaban) & "3走前レース取得" '実行中の処理を記載する。
                 If row.SelectNodes("//td[" & 9 + colyosousiCount & "]").Item(sansho_umaban).InnerHtml.IndexOf("<a") >= 0 Then
                     '3走前レース情報をリンクから取得する。
                     Dim sansoumae_info = row.SelectNodes("//td[" & 9 + colyosousiCount & "]/div[@class=""inner""]/div[@class=""racebox""]/span[@class=""race_name""]/a").Item(sansho_umaban - sansoumae_count)
@@ -239,7 +239,7 @@ Public Class SyutubahyouScrap
 
 
                 '4走前レースがあったかの判定をする。（ないOR休養）その他のレースなし情報があれば条件を追加することにする。
-                ShowForm.ShowFormInstance.JikkouMethodText = h_name(sansho_umaban) & "4走前レース取得" '実行中の処理を記載する。
+                ShowForm.ShowFormInstance.JikkouMethodText = temp_h_umaban & "." & h_name(sansho_umaban) & "4走前レース取得" '実行中の処理を記載する。
                 If row.SelectNodes("//td[" & 10 + colyosousiCount & "]").Item(sansho_umaban).InnerHtml.IndexOf("<a") >= 0 Then
                     '4走前レース情報をリンクから取得する。
                     Dim yonsoumae_info = row.SelectNodes("//td[" & 10 + colyosousiCount & "]/div[@class=""inner""]/div[@class=""racebox""]/span[@class=""race_name""]/a").Item(sansho_umaban - yonsoumae_count)
@@ -253,7 +253,7 @@ Public Class SyutubahyouScrap
 
 
                 '5走前レースがあったかの判定をする。（ないOR休養）その他のレースなし情報があれば条件を追加することにする。
-                ShowForm.ShowFormInstance.JikkouMethodText = h_name(sansho_umaban) & "5走前レース取得" '実行中の処理を記載する。
+                ShowForm.ShowFormInstance.JikkouMethodText = temp_h_umaban & "." & h_name(sansho_umaban) & "5走前レース取得" '実行中の処理を記載する。
                 If row.SelectNodes("//td[" & 11 + colyosousiCount & "]").Item(sansho_umaban).InnerHtml.IndexOf("<a") >= 0 Then
                     '5走前レース情報をリンクから取得する。
                     Dim gosoumae_info = row.SelectNodes("//td[" & 11 + colyosousiCount & "]/div[@class=""inner""]/div[@class=""racebox""]/span[@class=""race_name""]/a").Item(sansho_umaban - gosoumae_count)
