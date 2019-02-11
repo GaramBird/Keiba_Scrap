@@ -44,8 +44,8 @@
     'フォームロード（初期値設定）
     Private Sub Fromload(sender As Object, e As EventArgs) Handles MyBase.Load
         JikkouMethodText = "処理なし"
-        Me.txtSyutubahyouURL.Text = "https://race.netkeiba.com/?pid=race&id=c201806050811&mode=shutuba"  '初期値サンプル
-        'Me.txtSyutubahyouURL.Text = "https://race.netkeiba.com/?pid=race&id=c201905010611&mode=top"
+        'Me.txtSyutubahyouURL.Text = "https://race.netkeiba.com/?pid=race&id=c201806050811&mode=shutuba"  '初期値サンプル
+        Me.txtSyutubahyouURL.Text = "https://race.netkeiba.com/?pid=race&id=c201905010611&mode=shutuba"
         Me.dgvSyutubahyou.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
     End Sub
 
@@ -58,12 +58,11 @@
 
 
         If txtSyutubahyouURL.Text <> "" Then
-            If txtSyutubahyouURL.Text.IndexOf("mode=shutuba") >= 0 And txtSyutubahyouURL.Text.IndexOf("race.netkeiba.com") >= 0 Then
+            If txtSyutubahyouURL.Text.IndexOf("race.netkeiba.com") >= 0 And txtSyutubahyouURL.Text.IndexOf("mode=shutuba") >= 0 Then
                 scrap.Scraping(txtSyutubahyouURL.Text)  'スクレイピングを実行する。
-                'データをグリッドビューにセットする。
 
             Else
-                If MessageBox.Show("netkeiba.comのレース情報URLを入力してください。サイトを開きますか？", "確認", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+                If MessageBox.Show("netkeiba.comの出馬表（５柱）のURLを入力してください。サイトを開きますか？", "確認", MessageBoxButtons.YesNo) = DialogResult.Yes Then
                     System.Diagnostics.Process.Start("http://www.netkeiba.com/?rf=logo")
                 End If
             End If
