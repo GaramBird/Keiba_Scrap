@@ -27,8 +27,9 @@ Partial Class ShowForm
         Me.jikkouBar = New System.Windows.Forms.ProgressBar()
         Me.jikkoumethod = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.dgvSyutubahyou = New System.Windows.Forms.DataGridView()
+        Me.Label2 = New System.Windows.Forms.Label()
+        CType(Me.dgvSyutubahyou, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnGetSyutubahyou
@@ -54,6 +55,7 @@ Partial Class ShowForm
         Me.jikkouBar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.jikkouBar.Location = New System.Drawing.Point(-3, 423)
+        Me.jikkouBar.Maximum = 150
         Me.jikkouBar.Name = "jikkouBar"
         Me.jikkouBar.Size = New System.Drawing.Size(863, 13)
         Me.jikkouBar.TabIndex = 3
@@ -82,21 +84,34 @@ Partial Class ShowForm
         Me.Label1.TabIndex = 5
         Me.Label1.Text = "実行中："
         '
-        'DataGridView1
+        'dgvSyutubahyou
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(22, 66)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.RowTemplate.Height = 21
-        Me.DataGridView1.Size = New System.Drawing.Size(824, 334)
-        Me.DataGridView1.TabIndex = 6
+        Me.dgvSyutubahyou.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvSyutubahyou.Location = New System.Drawing.Point(22, 66)
+        Me.dgvSyutubahyou.Name = "dgvSyutubahyou"
+        Me.dgvSyutubahyou.RowTemplate.Height = 21
+        Me.dgvSyutubahyou.Size = New System.Drawing.Size(824, 334)
+        Me.dgvSyutubahyou.TabIndex = 6
+        Me.dgvSyutubahyou.TabStop = False
+        '
+        'Label2
+        '
+        Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(133, 4)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(243, 12)
+        Me.Label2.TabIndex = 7
+        Me.Label2.Text = "▼netkeiba.comの出馬表URLを入力してください。"
         '
         'ShowForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(858, 438)
-        Me.Controls.Add(Me.DataGridView1)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.dgvSyutubahyou)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.jikkoumethod)
         Me.Controls.Add(Me.jikkouBar)
@@ -104,7 +119,7 @@ Partial Class ShowForm
         Me.Controls.Add(Me.btnGetSyutubahyou)
         Me.Name = "ShowForm"
         Me.Text = "Form1"
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvSyutubahyou, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -115,5 +130,6 @@ Partial Class ShowForm
     Friend WithEvents Label1 As Label
     Public WithEvents jikkoumethod As TextBox
     Public WithEvents jikkouBar As ProgressBar
-    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents Label2 As Label
+    Public WithEvents dgvSyutubahyou As DataGridView
 End Class

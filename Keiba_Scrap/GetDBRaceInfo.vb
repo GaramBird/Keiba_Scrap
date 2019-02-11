@@ -1,7 +1,7 @@
 ﻿'競馬スクレイピングクラス
 Imports System.Text.RegularExpressions
 
-Public Class GetInfo
+Public Class GetDBRaceInfo
 
     Public Function NULLAgoRaceInfo(ByRef racename As List(Of String), ByRef nagasa As List(Of String), ByRef kaisaibi As List(Of String), ByRef basho As List(Of String), ByRef baba As List(Of String), ByRef baba_status As List(Of String), ByRef wether As List(Of String), ByRef juni As List(Of String), ByRef time As List(Of TimeSpan)) As Boolean
         racename.Add("")

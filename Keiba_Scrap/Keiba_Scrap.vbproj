@@ -81,8 +81,8 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GetInfo.vb" />
-    <Compile Include="DBaccess.vb" />
+    <Compile Include="StartClass.vb" />
+    <Compile Include="GetDBRaceInfo.vb" />
     <Compile Include="SyutubahyouScrap.vb" />
     <Compile Include="ShowForm.vb">
       <SubType>Form</SubType>

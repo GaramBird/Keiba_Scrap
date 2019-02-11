@@ -29,15 +29,28 @@
         End Set
     End Property
 
+    Public Property DataGridSet() As DataTable
+        Get
+            Return dgvSyutubahyou.DataSource
+        End Get
+        Set(ByVal Value As DataTable)
+            dgvSyutubahyou.DataSource = Value
+        End Set
+    End Property
 
 
 
 
+    'フォームロード（初期値設定）
     Private Sub Fromload(sender As Object, e As EventArgs) Handles MyBase.Load
         JikkouMethodText = "処理なし"
         Me.txtSyutubahyouURL.Text = "https://race.netkeiba.com/?pid=race&id=c201806050811&mode=shutuba"  '初期値サンプル
+        'Me.txtSyutubahyouURL.Text = "https://race.netkeiba.com/?pid=race&id=c201905010611&mode=top"
+        Me.dgvSyutubahyou.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
     End Sub
 
+
+    'レース取得ボタンのクリック
     Private Sub btnGetSyutubahyou_Click(sender As Object, e As EventArgs) Handles btnGetSyutubahyou.Click
         Me.btnGetSyutubahyou.Enabled = False
         JikkouBarValue += 1  '実行ステータスバーを加算する。
@@ -46,11 +59,12 @@
 
         If txtSyutubahyouURL.Text <> "" Then
             If txtSyutubahyouURL.Text.IndexOf("mode=shutuba") >= 0 And txtSyutubahyouURL.Text.IndexOf("race.netkeiba.com") >= 0 Then
-                scrap.Scraping(txtSyutubahyouURL.Text)
+                scrap.Scraping(txtSyutubahyouURL.Text)  'スクレイピングを実行する。
+                'データをグリッドビューにセットする。
+
             Else
                 If MessageBox.Show("netkeiba.comのレース情報URLを入力してください。サイトを開きますか？", "確認", MessageBoxButtons.YesNo) = DialogResult.Yes Then
                     System.Diagnostics.Process.Start("http://www.netkeiba.com/?rf=logo")
-
                 End If
             End If
         Else
@@ -65,12 +79,13 @@
         Me.btnGetSyutubahyou.Enabled = True
     End Sub
 
+    '
     Private Sub btnGetSyutubahyou_Enter(sender As Object, e As EventArgs) Handles btnGetSyutubahyou.Enter
         Me.txtSyutubahyouURL.SelectAll()
     End Sub
 
     Private Sub btnGetSyutubahyou_KeyDown(sender As Object, e As KeyEventArgs) Handles btnGetSyutubahyou.KeyDown
-        If e.Control And e.KeyCode = Keys.A = True Then
+        If e.KeyCode = Keys.Control AndAlso e.KeyCode = Keys.A Then
             Me.txtSyutubahyouURL.SelectAll()
         End If
     End Sub
@@ -85,4 +100,5 @@
             Call btnGetSyutubahyou_Click(Me.btnGetSyutubahyou, e)
         End If
     End Sub
+
 End Class

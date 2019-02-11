@@ -2,20 +2,11 @@
 Imports System.Text.RegularExpressions
 
 Public Class SyutubahyouScrap
-
-    Shared Sub Main()
-        Dim formctrl As ShowForm = New ShowForm
-        ShowForm.ShowFormInstance = formctrl
-        formctrl.ShowDialog()
-    End Sub
-
-
-
     Public Sub Scraping(syutubahyouurl)
         '正規表現
         Dim reg_int As New Regex("[^0-9]")  '数字のみを抽出に使用
         'インスタンス作成
-        Dim getinfo As GetInfo = New GetInfo
+        Dim getinfo As GetDBRaceInfo = New GetDBRaceInfo
 
         '取得したリスト
         Dim h_umaban As New List(Of Integer)
@@ -197,6 +188,7 @@ Public Class SyutubahyouScrap
                 h_ninki.Add(reg_int.Replace(oz(2), ""))
 
                 '1走前レースがあったかの判定をする。（ないOR休養）その他のレースなし情報があれば条件を追加することにする。
+                ShowForm.ShowFormInstance.JikkouBarValue += 1    '実行ステータスバーを加算する。
                 ShowForm.ShowFormInstance.JikkouMethodText = temp_h_umaban & "." & h_name(sansho_umaban) & "1走前レース取得" '実行中の処理を記載する。
                 If row.SelectNodes("//td[" & 7 + colyosousiCount & "]").Item(sansho_umaban).InnerHtml.IndexOf("<a") >= 0 Then
                     '1走前レース情報をリンクから取得する。
@@ -211,6 +203,7 @@ Public Class SyutubahyouScrap
 
 
                 '2走前レースがあったかの判定をする。（ないOR休養）その他のレースなし情報があれば条件を追加することにする。
+                ShowForm.ShowFormInstance.JikkouBarValue += 1    '実行ステータスバーを加算する。
                 ShowForm.ShowFormInstance.JikkouMethodText = temp_h_umaban & "." & h_name(sansho_umaban) & "2走前レース取得" '実行中の処理を記載する。
                 If row.SelectNodes("//td[" & 8 + colyosousiCount & "]").Item(sansho_umaban).InnerHtml.IndexOf("<a") >= 0 Then
                     '2走前レース情報をリンクから取得する。
@@ -225,6 +218,7 @@ Public Class SyutubahyouScrap
 
 
                 '3走前レースがあったかの判定をする。（ないOR休養）その他のレースなし情報があれば条件を追加することにする。
+                ShowForm.ShowFormInstance.JikkouBarValue += 1    '実行ステータスバーを加算する。
                 ShowForm.ShowFormInstance.JikkouMethodText = temp_h_umaban & "." & h_name(sansho_umaban) & "3走前レース取得" '実行中の処理を記載する。
                 If row.SelectNodes("//td[" & 9 + colyosousiCount & "]").Item(sansho_umaban).InnerHtml.IndexOf("<a") >= 0 Then
                     '3走前レース情報をリンクから取得する。
@@ -239,6 +233,7 @@ Public Class SyutubahyouScrap
 
 
                 '4走前レースがあったかの判定をする。（ないOR休養）その他のレースなし情報があれば条件を追加することにする。
+                ShowForm.ShowFormInstance.JikkouBarValue += 1    '実行ステータスバーを加算する。
                 ShowForm.ShowFormInstance.JikkouMethodText = temp_h_umaban & "." & h_name(sansho_umaban) & "4走前レース取得" '実行中の処理を記載する。
                 If row.SelectNodes("//td[" & 10 + colyosousiCount & "]").Item(sansho_umaban).InnerHtml.IndexOf("<a") >= 0 Then
                     '4走前レース情報をリンクから取得する。
@@ -253,6 +248,7 @@ Public Class SyutubahyouScrap
 
 
                 '5走前レースがあったかの判定をする。（ないOR休養）その他のレースなし情報があれば条件を追加することにする。
+                ShowForm.ShowFormInstance.JikkouBarValue += 1    '実行ステータスバーを加算する。
                 ShowForm.ShowFormInstance.JikkouMethodText = temp_h_umaban & "." & h_name(sansho_umaban) & "5走前レース取得" '実行中の処理を記載する。
                 If row.SelectNodes("//td[" & 11 + colyosousiCount & "]").Item(sansho_umaban).InnerHtml.IndexOf("<a") >= 0 Then
                     '5走前レース情報をリンクから取得する。
@@ -271,6 +267,27 @@ Public Class SyutubahyouScrap
         ShowForm.ShowFormInstance.JikkouMethodText = "「" & racename & "」情報を表示しています。" '実行中の処理を記載する。
         ShowForm.ShowFormInstance.JikkouBarValue = ShowForm.jikkouBar.Maximum    '実行ステータスバーを加算する。
         MessageBox.Show("出馬表のスクレイピングが完了しました。")
+
+        '取得したスクレイピングデータをデータグリッドビューのデータソースへとセットする。
+        Dim ds = New DataSet("スクレイピングデータセット")
+        Dim dt = New DataTable("スクレイピングデータテーブル")
+
+        'グリッドビュー設定
+        dt.Columns.Add("馬番", GetType(Integer))
+        dt.Columns.Add("馬名", GetType(String))
+
+        'For i = 0 To h_umaban.Count - 1
+        '    Dim datarow As DataRow = dt.NewRow
+        '    datarow("馬番") = h_umaban(i)
+        '    datarow("馬名") = h_name(i)
+        'Next
+
+        For i = 0 To h_umaban.Count - 1
+            dt.Rows.Add(h_umaban(i), h_name(i))
+        Next
+
+        ShowForm.ShowFormInstance.DataGridSet = dt
+
     End Sub
 
 
