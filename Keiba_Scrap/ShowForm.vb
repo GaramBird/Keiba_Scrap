@@ -1,4 +1,6 @@
-﻿Public Class ShowForm
+﻿Imports System.ComponentModel
+
+Public Class ShowForm
     Shared scrap As SyutubahyouScrap = New SyutubahyouScrap
 
 #Region "プロパティ"
@@ -55,6 +57,7 @@
     'レース取得ボタンのクリック
     Private Sub btnGetSyutubahyou_Click(sender As Object, e As EventArgs) Handles btnGetSyutubahyou.Click
         Me.btnGetSyutubahyou.Enabled = False
+        Me.btnCancel.Enabled = True
         JikkouBarValue += 1  '実行ステータスバーを加算する。
         JikkouMethodText = "処理開始" '実行中の処理を記載する。
 
@@ -68,16 +71,24 @@
             Else
                 If MessageBox.Show("netkeiba.comの出馬表（５柱）のURLを入力してください。サイトを開きますか？", "確認", MessageBoxButtons.YesNo) = DialogResult.Yes Then
                     System.Diagnostics.Process.Start("http://www.netkeiba.com/?rf=logo")
+                    Exit Sub
+                Else
+                    Exit Sub
                 End If
             End If
         Else
             If MessageBox.Show("URLが入力されていません。サイトを開きますか？", "確認", MessageBoxButtons.YesNo) = DialogResult.Yes Then
                 System.Diagnostics.Process.Start("http://www.netkeiba.com/?rf=logo")
+                Exit Sub
+            Else
+                Exit Sub
             End If
         End If
 
         JikkouBarValue = 0
         If JikkouMethodText.IndexOf("表示しています") >= 0 Then
+            Me.btnCSVGridView.Enabled = True
+            Me.btnCancel.Enabled = False
         Else
             JikkouMethodText = "処理なし" '実行中の処理を記載する。
         End If
@@ -107,6 +118,26 @@
     End Sub
 
     Private Sub btnBrowserView_Click(sender As Object, e As EventArgs) Handles btnBrowserView.Click
-        System.Diagnostics.Process.Start(Me.txtSyutubahyouURL.Text)
+        Try
+            System.Diagnostics.Process.Start(Me.txtSyutubahyouURL.Text)
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+        End Try
     End Sub
+
+    Private Sub txtSyutubahyouURL_TextChanged(sender As Object, e As EventArgs) Handles txtSyutubahyouURL.TextChanged
+        If Me.txtSyutubahyouURL.Text.IndexOf("http://") >= 0 Or Me.txtSyutubahyouURL.Text.IndexOf("https://") >= 0 Then
+            Me.btnBrowserView.Enabled = True
+        Else
+            Me.btnBrowserView.Enabled = False
+        End If
+    End Sub
+
+    Private Sub btnCSVGridView_Click(sender As Object, e As EventArgs) Handles btnCSVGridView.Click
+        If MessageBox.Show("表示しているグリッドビューをCSV出力しますか？（未実装、処理なし）", "確認", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+
+        End If
+
+    End Sub
+
 End Class

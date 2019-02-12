@@ -30,15 +30,18 @@ Partial Class ShowForm
         Me.dgvSyutubahyou = New System.Windows.Forms.DataGridView()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnBrowserView = New System.Windows.Forms.Button()
+        Me.btnCSVGridView = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
         CType(Me.dgvSyutubahyou, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnGetSyutubahyou
         '
-        Me.btnGetSyutubahyou.Location = New System.Drawing.Point(22, 22)
+        Me.btnGetSyutubahyou.Location = New System.Drawing.Point(22, 24)
         Me.btnGetSyutubahyou.Name = "btnGetSyutubahyou"
-        Me.btnGetSyutubahyou.Size = New System.Drawing.Size(107, 23)
+        Me.btnGetSyutubahyou.Size = New System.Drawing.Size(127, 23)
         Me.btnGetSyutubahyou.TabIndex = 1
+        Me.btnGetSyutubahyou.TabStop = False
         Me.btnGetSyutubahyou.Text = "レース情報取得"
         Me.btnGetSyutubahyou.UseVisualStyleBackColor = True
         '
@@ -46,9 +49,9 @@ Partial Class ShowForm
         '
         Me.txtSyutubahyouURL.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtSyutubahyouURL.Location = New System.Drawing.Point(135, 24)
+        Me.txtSyutubahyouURL.Location = New System.Drawing.Point(288, 26)
         Me.txtSyutubahyouURL.Name = "txtSyutubahyouURL"
-        Me.txtSyutubahyouURL.Size = New System.Drawing.Size(711, 19)
+        Me.txtSyutubahyouURL.Size = New System.Drawing.Size(546, 19)
         Me.txtSyutubahyouURL.TabIndex = 0
         '
         'jikkouBar
@@ -103,7 +106,7 @@ Partial Class ShowForm
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(133, 6)
+        Me.Label2.Location = New System.Drawing.Point(297, 6)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(243, 12)
         Me.Label2.TabIndex = 7
@@ -112,18 +115,45 @@ Partial Class ShowForm
         'btnBrowserView
         '
         Me.btnBrowserView.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnBrowserView.Location = New System.Drawing.Point(719, 1)
+        Me.btnBrowserView.Enabled = False
+        Me.btnBrowserView.Location = New System.Drawing.Point(155, 1)
         Me.btnBrowserView.Name = "btnBrowserView"
         Me.btnBrowserView.Size = New System.Drawing.Size(127, 23)
         Me.btnBrowserView.TabIndex = 8
+        Me.btnBrowserView.TabStop = False
         Me.btnBrowserView.Text = "URLをブラウザで表示"
         Me.btnBrowserView.UseVisualStyleBackColor = True
+        '
+        'btnCSVGridView
+        '
+        Me.btnCSVGridView.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCSVGridView.Enabled = False
+        Me.btnCSVGridView.Location = New System.Drawing.Point(22, 1)
+        Me.btnCSVGridView.Name = "btnCSVGridView"
+        Me.btnCSVGridView.Size = New System.Drawing.Size(127, 23)
+        Me.btnCSVGridView.TabIndex = 9
+        Me.btnCSVGridView.TabStop = False
+        Me.btnCSVGridView.Text = "CSV出力（未実装）"
+        Me.btnCSVGridView.UseVisualStyleBackColor = True
+        '
+        'btnCancel
+        '
+        Me.btnCancel.Enabled = False
+        Me.btnCancel.Location = New System.Drawing.Point(155, 24)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(127, 23)
+        Me.btnCancel.TabIndex = 10
+        Me.btnCancel.TabStop = False
+        Me.btnCancel.Text = "キャンセル（未実装）"
+        Me.btnCancel.UseVisualStyleBackColor = True
         '
         'ShowForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(858, 539)
+        Me.Controls.Add(Me.btnCancel)
+        Me.Controls.Add(Me.btnCSVGridView)
         Me.Controls.Add(Me.btnBrowserView)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.dgvSyutubahyou)
@@ -148,4 +178,6 @@ Partial Class ShowForm
     Friend WithEvents Label2 As Label
     Public WithEvents dgvSyutubahyou As DataGridView
     Friend WithEvents btnBrowserView As Button
+    Friend WithEvents btnCSVGridView As Button
+    Friend WithEvents btnCancel As Button
 End Class
