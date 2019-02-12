@@ -29,6 +29,7 @@ Partial Class ShowForm
         Me.Label1 = New System.Windows.Forms.Label()
         Me.dgvSyutubahyou = New System.Windows.Forms.DataGridView()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.btnBrowserView = New System.Windows.Forms.Button()
         CType(Me.dgvSyutubahyou, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -108,11 +109,22 @@ Partial Class ShowForm
         Me.Label2.TabIndex = 7
         Me.Label2.Text = "▼netkeiba.comの出馬表URLを入力してください。"
         '
+        'btnBrowserView
+        '
+        Me.btnBrowserView.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnBrowserView.Location = New System.Drawing.Point(719, 1)
+        Me.btnBrowserView.Name = "btnBrowserView"
+        Me.btnBrowserView.Size = New System.Drawing.Size(127, 23)
+        Me.btnBrowserView.TabIndex = 8
+        Me.btnBrowserView.Text = "URLをブラウザで表示"
+        Me.btnBrowserView.UseVisualStyleBackColor = True
+        '
         'ShowForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(858, 539)
+        Me.Controls.Add(Me.btnBrowserView)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.dgvSyutubahyou)
         Me.Controls.Add(Me.Label1)
@@ -135,4 +147,5 @@ Partial Class ShowForm
     Public WithEvents jikkouBar As ProgressBar
     Friend WithEvents Label2 As Label
     Public WithEvents dgvSyutubahyou As DataGridView
+    Friend WithEvents btnBrowserView As Button
 End Class

@@ -106,4 +106,7 @@
         End If
     End Sub
 
+    Private Sub btnBrowserView_Click(sender As Object, e As EventArgs) Handles btnBrowserView.Click
+        System.Diagnostics.Process.Start(Me.txtSyutubahyouURL.Text)
+    End Sub
 End Class

@@ -156,8 +156,6 @@ Public Class SyutubahyouScrap
             ShowForm.ShowFormInstance.JikkouBarValue += 1    '実行ステータスバーを加算する。
 
             For Each row In syutubahyou_objDOC.DocumentNode.SelectNodes("//table[@class=""race_table_01 nk_tb_common shutuba_table""]/tr[" & temp_h_umaban + 1 & "]")
-                ShowForm.ShowFormInstance.JikkouBarValue += 1    '実行ステータスバーを加算する。
-
                 Dim sansho_umaban As Integer = temp_h_umaban - 1    'テーブル列位置が相対変化するためインデックスを1つ下げる。
 
                 '馬名を取得する。
