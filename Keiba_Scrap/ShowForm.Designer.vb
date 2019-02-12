@@ -32,6 +32,8 @@ Partial Class ShowForm
         Me.btnBrowserView = New System.Windows.Forms.Button()
         Me.btnCSVGridView = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnGo = New System.Windows.Forms.Button()
+        Me.btnBack = New System.Windows.Forms.Button()
         CType(Me.dgvSyutubahyou, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -51,7 +53,7 @@ Partial Class ShowForm
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtSyutubahyouURL.Location = New System.Drawing.Point(288, 26)
         Me.txtSyutubahyouURL.Name = "txtSyutubahyouURL"
-        Me.txtSyutubahyouURL.Size = New System.Drawing.Size(546, 19)
+        Me.txtSyutubahyouURL.Size = New System.Drawing.Size(506, 19)
         Me.txtSyutubahyouURL.TabIndex = 0
         '
         'jikkouBar
@@ -147,11 +149,33 @@ Partial Class ShowForm
         Me.btnCancel.Text = "キャンセル（未実装）"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
+        'btnGo
+        '
+        Me.btnGo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnGo.Location = New System.Drawing.Point(820, 24)
+        Me.btnGo.Name = "btnGo"
+        Me.btnGo.Size = New System.Drawing.Size(26, 23)
+        Me.btnGo.TabIndex = 11
+        Me.btnGo.Text = ">"
+        Me.btnGo.UseVisualStyleBackColor = True
+        '
+        'btnBack
+        '
+        Me.btnBack.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnBack.Location = New System.Drawing.Point(794, 24)
+        Me.btnBack.Name = "btnBack"
+        Me.btnBack.Size = New System.Drawing.Size(26, 23)
+        Me.btnBack.TabIndex = 12
+        Me.btnBack.Text = "<"
+        Me.btnBack.UseVisualStyleBackColor = True
+        '
         'ShowForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(858, 539)
+        Me.Controls.Add(Me.btnBack)
+        Me.Controls.Add(Me.btnGo)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnCSVGridView)
         Me.Controls.Add(Me.btnBrowserView)
@@ -180,4 +204,6 @@ Partial Class ShowForm
     Friend WithEvents btnBrowserView As Button
     Friend WithEvents btnCSVGridView As Button
     Friend WithEvents btnCancel As Button
+    Friend WithEvents btnGo As Button
+    Friend WithEvents btnBack As Button
 End Class
