@@ -56,43 +56,53 @@ Public Class ShowForm
 
     'レース取得ボタンのクリック
     Private Sub btnGetSyutubahyou_Click(sender As Object, e As EventArgs) Handles btnGetSyutubahyou.Click
-        Me.btnGetSyutubahyou.Enabled = False
-        Me.btnCancel.Enabled = True
-        JikkouBarValue += 1  '実行ステータスバーを加算する。
-        JikkouMethodText = "処理開始" '実行中の処理を記載する。
-
 
         If txtSyutubahyouURL.Text <> "" Then
             If txtSyutubahyouURL.Text.IndexOf("race.netkeiba.com") >= 0 And txtSyutubahyouURL.Text.Substring(txtSyutubahyouURL.Text.Length - 12) = "mode=shutuba" Then
+                Me.btnGetSyutubahyou.Enabled = False
+                Me.btnCancel.Enabled = True
+                Me.btnCSVGridView.Enabled = False
+                JikkouBarValue += 1  '実行ステータスバーを加算する。
+                JikkouMethodText = "処理開始" '実行中の処理を記載する。
                 DataGridSet = Nothing
                 Me.dgvSyutubahyou.Refresh()
                 scrap.Scraping(txtSyutubahyouURL.Text)  'スクレイピングを実行する。
 
             Else
-                If MessageBox.Show("netkeiba.comの出馬表（５柱）のURLを入力してください。サイトを開きますか？", "確認", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+                If MessageBox.Show("netkeiba.comの出馬表（５柱）のURLを入力してください。" & vbCrLf & "トップページ→レース→レース一覧→レース名→出馬表→出馬表（5柱）" & vbCrLf & vbCrLf & "サイトを開きますか？", "確認", MessageBoxButtons.YesNo) = DialogResult.Yes Then
                     System.Diagnostics.Process.Start("http://www.netkeiba.com/?rf=logo")
+                    Me.btnGetSyutubahyou.Enabled = True
+                    Me.btnCancel.Enabled = False
                     Exit Sub
                 Else
+                    Me.btnGetSyutubahyou.Enabled = True
+                    Me.btnCancel.Enabled = False
                     Exit Sub
                 End If
             End If
         Else
             If MessageBox.Show("URLが入力されていません。サイトを開きますか？", "確認", MessageBoxButtons.YesNo) = DialogResult.Yes Then
                 System.Diagnostics.Process.Start("http://www.netkeiba.com/?rf=logo")
+                Me.btnGetSyutubahyou.Enabled = True
+                Me.btnCancel.Enabled = False
                 Exit Sub
             Else
+                Me.btnGetSyutubahyou.Enabled = True
+                Me.btnCancel.Enabled = False
                 Exit Sub
             End If
         End If
 
         JikkouBarValue = 0
         If JikkouMethodText.IndexOf("表示しています") >= 0 Then
-            Me.btnCSVGridView.Enabled = True
+            Me.btnGetSyutubahyou.Enabled = True
             Me.btnCancel.Enabled = False
+            Me.btnCSVGridView.Enabled = True
         Else
-            JikkouMethodText = "処理なし" '実行中の処理を記載する。
+            Me.btnGetSyutubahyou.Enabled = False
+            Me.btnCancel.Enabled = False
+            Me.btnCSVGridView.Enabled = False
         End If
-        Me.btnGetSyutubahyou.Enabled = True
     End Sub
 
     '
