@@ -156,6 +156,7 @@ Partial Class ShowForm
         Me.btnGo.Name = "btnGo"
         Me.btnGo.Size = New System.Drawing.Size(26, 23)
         Me.btnGo.TabIndex = 11
+        Me.btnGo.TabStop = False
         Me.btnGo.Text = ">"
         Me.btnGo.UseVisualStyleBackColor = True
         '
@@ -166,6 +167,7 @@ Partial Class ShowForm
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(26, 23)
         Me.btnBack.TabIndex = 12
+        Me.btnBack.TabStop = False
         Me.btnBack.Text = "<"
         Me.btnBack.UseVisualStyleBackColor = True
         '
