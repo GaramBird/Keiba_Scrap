@@ -22,6 +22,7 @@ Partial Class ShowForm
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ShowForm))
         Me.btnGetSyutubahyou = New System.Windows.Forms.Button()
         Me.txtSyutubahyouURL = New System.Windows.Forms.TextBox()
         Me.jikkouBar = New System.Windows.Forms.ProgressBar()
@@ -47,21 +48,22 @@ Partial Class ShowForm
         '
         'txtSyutubahyouURL
         '
+        Me.txtSyutubahyouURL.AllowDrop = True
         Me.txtSyutubahyouURL.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtSyutubahyouURL.Location = New System.Drawing.Point(270, 26)
         Me.txtSyutubahyouURL.Name = "txtSyutubahyouURL"
-        Me.txtSyutubahyouURL.Size = New System.Drawing.Size(590, 19)
+        Me.txtSyutubahyouURL.Size = New System.Drawing.Size(616, 19)
         Me.txtSyutubahyouURL.TabIndex = 0
         '
         'jikkouBar
         '
         Me.jikkouBar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.jikkouBar.Location = New System.Drawing.Point(-3, 524)
+        Me.jikkouBar.Location = New System.Drawing.Point(-3, 517)
         Me.jikkouBar.Maximum = 150
         Me.jikkouBar.Name = "jikkouBar"
-        Me.jikkouBar.Size = New System.Drawing.Size(863, 13)
+        Me.jikkouBar.Size = New System.Drawing.Size(889, 13)
         Me.jikkouBar.TabIndex = 3
         '
         'jikkoumethod
@@ -70,11 +72,11 @@ Partial Class ShowForm
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.jikkoumethod.BackColor = System.Drawing.SystemColors.Control
         Me.jikkoumethod.Enabled = False
-        Me.jikkoumethod.Location = New System.Drawing.Point(61, 504)
+        Me.jikkoumethod.Location = New System.Drawing.Point(61, 497)
         Me.jikkoumethod.Margin = New System.Windows.Forms.Padding(0)
         Me.jikkoumethod.Name = "jikkoumethod"
         Me.jikkoumethod.ReadOnly = True
-        Me.jikkoumethod.Size = New System.Drawing.Size(799, 19)
+        Me.jikkoumethod.Size = New System.Drawing.Size(825, 19)
         Me.jikkoumethod.TabIndex = 4
         Me.jikkoumethod.TabStop = False
         '
@@ -83,7 +85,7 @@ Partial Class ShowForm
         Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(2, 507)
+        Me.Label1.Location = New System.Drawing.Point(2, 500)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(56, 12)
         Me.Label1.TabIndex = 5
@@ -99,7 +101,7 @@ Partial Class ShowForm
         Me.dgvSyutubahyou.Name = "dgvSyutubahyou"
         Me.dgvSyutubahyou.ReadOnly = True
         Me.dgvSyutubahyou.RowTemplate.Height = 21
-        Me.dgvSyutubahyou.Size = New System.Drawing.Size(863, 450)
+        Me.dgvSyutubahyou.Size = New System.Drawing.Size(889, 443)
         Me.dgvSyutubahyou.TabIndex = 6
         Me.dgvSyutubahyou.TabStop = False
         '
@@ -149,7 +151,7 @@ Partial Class ShowForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(858, 539)
+        Me.ClientSize = New System.Drawing.Size(884, 532)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnCSVGridView)
         Me.Controls.Add(Me.btnBrowserView)
@@ -160,6 +162,7 @@ Partial Class ShowForm
         Me.Controls.Add(Me.jikkouBar)
         Me.Controls.Add(Me.txtSyutubahyouURL)
         Me.Controls.Add(Me.btnGetSyutubahyou)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "ShowForm"
         Me.Text = "Form1"
         CType(Me.dgvSyutubahyou, System.ComponentModel.ISupportInitialize).EndInit()

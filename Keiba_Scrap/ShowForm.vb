@@ -51,10 +51,11 @@ Public Class ShowForm
     'フォームロード（初期値設定）
     Private Sub Fromload(sender As Object, e As EventArgs) Handles MyBase.Load
         JikkouMethodText = "初期画面"
+        Me.MinimumSize = New Size(700, 570)
         Me.txtSyutubahyouURL.Text = gsDefaultURL  '初期値サンプル
+        Me.txtSyutubahyouURL.SelectAll()
         Me.dgvSyutubahyou.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
         Me.dgvSyutubahyou.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        Me.MinimumSize = New Size(900, 570)
     End Sub
 
 
@@ -70,10 +71,16 @@ Public Class ShowForm
                 JikkouMethodText = "処理開始" '実行中の処理を記載する。
                 DataGridSet = Nothing
                 Me.dgvSyutubahyou.Refresh()
-                scrap.Scraping(txtSyutubahyouURL.Text)  'スクレイピングを実行する。
+                If Not scrap.Scraping(txtSyutubahyouURL.Text) Then  'スクレイピングを実行する。
+                    JikkouBarValue = 0
+                    JikkouMethodText = "処理失敗"
+                    Me.btnGetSyutubahyou.Enabled = True
+                    Me.btnCancel.Enabled = False
+                    Exit Sub
+                End If
 
             Else
-                If MessageBox.Show("netkeiba.comの出馬表（５柱）のURLを入力してください。" & vbCrLf & "トップページ→レース→レース一覧→レース名→出馬表→出馬表（5柱）" & vbCrLf & vbCrLf & "サイトを開きますか？", "確認", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+                If MessageBox.Show("netkeiba.comの出馬表（５柱）のURLを入力してください。" & vbCrLf & "トップページ→レース→レース一覧→レース名→出馬表→出馬表（5柱）" & vbCrLf & vbCrLf & "netkeiba.comを開きますか？", "確認", MessageBoxButtons.YesNo) = DialogResult.Yes Then
                     System.Diagnostics.Process.Start("http://www.netkeiba.com/?rf=logo")
                     Me.btnGetSyutubahyou.Enabled = True
                     Me.btnCancel.Enabled = False
@@ -85,7 +92,7 @@ Public Class ShowForm
                 End If
             End If
         Else
-            If MessageBox.Show("URLが入力されていません。サイトを開きますか？", "確認", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+            If MessageBox.Show("URLが入力されていません。netkeiba.comを開きますか", "確認", MessageBoxButtons.YesNo) = DialogResult.Yes Then
                 System.Diagnostics.Process.Start("http://www.netkeiba.com/?rf=logo")
                 Me.btnGetSyutubahyou.Enabled = True
                 Me.btnCancel.Enabled = False
@@ -138,11 +145,27 @@ Public Class ShowForm
                 If gsInputCount = 1 Then
                     Me.txtSyutubahyouURL.Text = gsDefaultURL
                 Else
+                    Dim selectlen = Me.txtSyutubahyouURL.SelectionStart
+                    Dim beforelen = Me.txtSyutubahyouURL.Text.Length
                     Me.txtSyutubahyouURL.Text = gsInputText(gsInputCount - 2)
+                    If beforelen > Me.txtSyutubahyouURL.Text.Length Then
+                        '文字列が減ったら引く
+                        If selectlen > beforelen - gsInputText(gsInputCount - 2).Length Then
+                            Me.txtSyutubahyouURL.SelectionStart = selectlen - (beforelen - gsInputText(gsInputCount - 2).Length)
+                        Else
+                            Me.txtSyutubahyouURL.SelectionStart = 0
+                        End If
+
+                    ElseIf beforelen < Me.txtSyutubahyouURL.Text.Length Then
+                        '文字列が増えたら足す
+                        Me.txtSyutubahyouURL.SelectionStart = selectlen + (gsInputText(gsInputCount - 2).Length - beforelen)
+                    Else
+                        '文字列の数が同じなら変わらない
+                        Me.txtSyutubahyouURL.SelectionStart = selectlen
+                    End If
                 End If
                 gsInputCount -= 1
             End If
-            Me.txtSyutubahyouURL.SelectionStart = Me.txtSyutubahyouURL.Text.Length
         End If
 
         'Ctrl+Yキー
@@ -151,12 +174,27 @@ Public Class ShowForm
                 gsBackandGoFlg = 1
                 If gsInputCount = gsInputText.Count Then
                 Else
+                    Dim selectlen = Me.txtSyutubahyouURL.SelectionStart
+                    Dim beforelen = Me.txtSyutubahyouURL.Text.Length
                     Me.txtSyutubahyouURL.Text = gsInputText(gsInputCount)
+                    If beforelen > Me.txtSyutubahyouURL.Text.Length Then
+                        '文字列が減ったら引く
+                        If selectlen > beforelen - gsInputText(gsInputCount).Length Then
+                            Me.txtSyutubahyouURL.SelectionStart = selectlen - (beforelen - gsInputText(gsInputCount).Length)
+                        Else
+                            Me.txtSyutubahyouURL.SelectionStart = 0
+                        End If
+                    ElseIf beforelen < Me.txtSyutubahyouURL.Text.Length Then
+                        '文字列が増えたら足す
+                        Me.txtSyutubahyouURL.SelectionStart = selectlen + (gsInputText(gsInputCount).Length - beforelen)
+                    Else
+                        '文字列の数が同じなら変わらない
+                        Me.txtSyutubahyouURL.SelectionStart = selectlen
+                    End If
                     gsInputText.Remove(gsInputCount - 1)
                     gsInputCount += 1
                 End If
             End If
-            Me.txtSyutubahyouURL.SelectionStart = Me.txtSyutubahyouURL.Text.Length
         End If
 
     End Sub

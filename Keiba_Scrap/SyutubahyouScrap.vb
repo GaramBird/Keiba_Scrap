@@ -2,7 +2,7 @@
 Imports System.Text.RegularExpressions
 
 Public Class SyutubahyouScrap
-    Public Sub Scraping(syutubahyouurl)
+    Public Function Scraping(syutubahyouurl) As Boolean
         '正規表現
         Dim reg_int As New Regex("[^0-9]")  '数字のみを抽出に使用
         'インスタンス作成
@@ -106,12 +106,13 @@ Public Class SyutubahyouScrap
 
         'URLの取得検証
         Try
+            ShowForm.ShowFormInstance.JikkouMethodText = "URLの取得検証" '実行中の処理を記載する。
             syutubahyou_html = objWC.DownloadString(syutubahyou_url)
             syutubahyou_objDOC = New HtmlAgilityPack.HtmlDocument()
             syutubahyou_objDOC.LoadHtml(syutubahyou_html)
         Catch ex As Exception
             MessageBox.Show("URLの取得に失敗しました。")
-            Exit Sub
+            Return False
         End Try
 
         ShowForm.ShowFormInstance.JikkouBarValue += 1    '実行ステータスバーを加算する。
@@ -120,7 +121,16 @@ Public Class SyutubahyouScrap
         syutubahyou_objDOC = New HtmlAgilityPack.HtmlDocument()
         syutubahyou_objDOC.LoadHtml(syutubahyou_html)
 
-        '取得したレース名を取得する。
+        '取得したURLのレース名を取得する。
+        Try
+            ShowForm.ShowFormInstance.JikkouMethodText = "レース名の取得検証" '実行中の処理を記載する。
+            syutubahyou_objDOC.DocumentNode.SelectNodes("//div[@class=""data_intro""]/dl/dd/h1").Item(0).InnerText.Replace("&nbsp;", "")
+        Catch ex As Exception
+            If MessageBox.Show("レース名の取得に失敗しました。URLを確認してください。" & vbCrLf & "netkeiba.comを開きますか？", "確認", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+                System.Diagnostics.Process.Start("http://www.netkeiba.com/?rf=logo")
+            End If
+            Return False
+        End Try
         Dim racename = syutubahyou_objDOC.DocumentNode.SelectNodes("//div[@class=""data_intro""]/dl/dd/h1").Item(0).InnerText.Replace("&nbsp;", "")
 
         '予想紙の有無によって参照するTDインデックスを変化させる。
@@ -197,7 +207,7 @@ Public Class SyutubahyouScrap
 
                 '1走前レースがあったかの判定をする。（ないOR休養）その他のレースなし情報があれば条件を追加することにする。
                 ShowForm.ShowFormInstance.JikkouBarValue += 1    '実行ステータスバーを加算する。
-                ShowForm.ShowFormInstance.JikkouMethodText = temp_h_umaban & "." & h_name(sansho_umaban) & "1走前レース取得" '実行中の処理を記載する。
+                ShowForm.ShowFormInstance.JikkouMethodText = h_umaban.Count & "頭中：" & temp_h_umaban & "." & h_name(sansho_umaban) & "1走前レース取得" '実行中の処理を記載する。
                 If row.SelectNodes("//td[" & 7 + colyosousiCount & "]").Item(sansho_umaban).InnerHtml.IndexOf("<a") >= 0 Then
                     '1走前レース情報をリンクから取得する。
                     Dim itisoumae_info = row.SelectNodes("//td[" & 7 + colyosousiCount & "]/div[@class=""inner""]/div[@class=""racebox""]/span[@class=""race_name""]/a").Item(sansho_umaban - itisoumae_count)
@@ -212,7 +222,7 @@ Public Class SyutubahyouScrap
 
                 '2走前レースがあったかの判定をする。（ないOR休養）その他のレースなし情報があれば条件を追加することにする。
                 ShowForm.ShowFormInstance.JikkouBarValue += 1    '実行ステータスバーを加算する。
-                ShowForm.ShowFormInstance.JikkouMethodText = temp_h_umaban & "." & h_name(sansho_umaban) & "2走前レース取得" '実行中の処理を記載する。
+                ShowForm.ShowFormInstance.JikkouMethodText = h_umaban.Count & "頭中：" & temp_h_umaban & "." & h_name(sansho_umaban) & "2走前レース取得" '実行中の処理を記載する。
                 If row.SelectNodes("//td[" & 8 + colyosousiCount & "]").Item(sansho_umaban).InnerHtml.IndexOf("<a") >= 0 Then
                     '2走前レース情報をリンクから取得する。
                     Dim nisoumae_info = row.SelectNodes("//td[" & 8 + colyosousiCount & "]/div[@class=""inner""]/div[@class=""racebox""]/span[@class=""race_name""]/a").Item(sansho_umaban - nisoumae_count)
@@ -227,7 +237,7 @@ Public Class SyutubahyouScrap
 
                 '3走前レースがあったかの判定をする。（ないOR休養）その他のレースなし情報があれば条件を追加することにする。
                 ShowForm.ShowFormInstance.JikkouBarValue += 1    '実行ステータスバーを加算する。
-                ShowForm.ShowFormInstance.JikkouMethodText = temp_h_umaban & "." & h_name(sansho_umaban) & "3走前レース取得" '実行中の処理を記載する。
+                ShowForm.ShowFormInstance.JikkouMethodText = h_umaban.Count & "頭中：" & temp_h_umaban & "." & h_name(sansho_umaban) & "3走前レース取得" '実行中の処理を記載する。
                 If row.SelectNodes("//td[" & 9 + colyosousiCount & "]").Item(sansho_umaban).InnerHtml.IndexOf("<a") >= 0 Then
                     '3走前レース情報をリンクから取得する。
                     Dim sansoumae_info = row.SelectNodes("//td[" & 9 + colyosousiCount & "]/div[@class=""inner""]/div[@class=""racebox""]/span[@class=""race_name""]/a").Item(sansho_umaban - sansoumae_count)
@@ -242,7 +252,7 @@ Public Class SyutubahyouScrap
 
                 '4走前レースがあったかの判定をする。（ないOR休養）その他のレースなし情報があれば条件を追加することにする。
                 ShowForm.ShowFormInstance.JikkouBarValue += 1    '実行ステータスバーを加算する。
-                ShowForm.ShowFormInstance.JikkouMethodText = temp_h_umaban & "." & h_name(sansho_umaban) & "4走前レース取得" '実行中の処理を記載する。
+                ShowForm.ShowFormInstance.JikkouMethodText = h_umaban.Count & "頭中：" & temp_h_umaban & "." & h_name(sansho_umaban) & "4走前レース取得" '実行中の処理を記載する。
                 If row.SelectNodes("//td[" & 10 + colyosousiCount & "]").Item(sansho_umaban).InnerHtml.IndexOf("<a") >= 0 Then
                     '4走前レース情報をリンクから取得する。
                     Dim yonsoumae_info = row.SelectNodes("//td[" & 10 + colyosousiCount & "]/div[@class=""inner""]/div[@class=""racebox""]/span[@class=""race_name""]/a").Item(sansho_umaban - yonsoumae_count)
@@ -257,7 +267,7 @@ Public Class SyutubahyouScrap
 
                 '5走前レースがあったかの判定をする。（ないOR休養）その他のレースなし情報があれば条件を追加することにする。
                 ShowForm.ShowFormInstance.JikkouBarValue += 1    '実行ステータスバーを加算する。
-                ShowForm.ShowFormInstance.JikkouMethodText = temp_h_umaban & "." & h_name(sansho_umaban) & "5走前レース取得" '実行中の処理を記載する。
+                ShowForm.ShowFormInstance.JikkouMethodText = h_umaban.Count & "頭中：" & temp_h_umaban & "." & h_name(sansho_umaban) & "5走前レース取得" '実行中の処理を記載する。
                 If row.SelectNodes("//td[" & 11 + colyosousiCount & "]").Item(sansho_umaban).InnerHtml.IndexOf("<a") >= 0 Then
                     '5走前レース情報をリンクから取得する。
                     Dim gosoumae_info = row.SelectNodes("//td[" & 11 + colyosousiCount & "]/div[@class=""inner""]/div[@class=""racebox""]/span[@class=""race_name""]/a").Item(sansho_umaban - gosoumae_count)
@@ -362,7 +372,7 @@ Public Class SyutubahyouScrap
 #End Region
 
 
-    End Sub
+    End Function
 
 
 End Class
