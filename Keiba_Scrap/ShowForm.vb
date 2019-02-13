@@ -54,6 +54,7 @@ Public Class ShowForm
         Me.txtSyutubahyouURL.Text = gsDefaultURL  '初期値サンプル
         Me.dgvSyutubahyou.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
         Me.dgvSyutubahyou.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+        Me.MinimumSize = New Size(900, 570)
     End Sub
 
 
@@ -141,6 +142,7 @@ Public Class ShowForm
                 End If
                 gsInputCount -= 1
             End If
+            Me.txtSyutubahyouURL.SelectionStart = Me.txtSyutubahyouURL.Text.Length
         End If
 
         'Ctrl+Yキー
@@ -154,6 +156,7 @@ Public Class ShowForm
                     gsInputCount += 1
                 End If
             End If
+            Me.txtSyutubahyouURL.SelectionStart = Me.txtSyutubahyouURL.Text.Length
         End If
 
     End Sub

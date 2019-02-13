@@ -28,16 +28,16 @@ Partial Class ShowForm
         Me.jikkoumethod = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.dgvSyutubahyou = New System.Windows.Forms.DataGridView()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.btnBrowserView = New System.Windows.Forms.Button()
         Me.btnCSVGridView = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
+        Me.Label2 = New System.Windows.Forms.Label()
         CType(Me.dgvSyutubahyou, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnGetSyutubahyou
         '
-        Me.btnGetSyutubahyou.Location = New System.Drawing.Point(22, 24)
+        Me.btnGetSyutubahyou.Location = New System.Drawing.Point(4, 24)
         Me.btnGetSyutubahyou.Name = "btnGetSyutubahyou"
         Me.btnGetSyutubahyou.Size = New System.Drawing.Size(127, 23)
         Me.btnGetSyutubahyou.TabIndex = 1
@@ -49,9 +49,9 @@ Partial Class ShowForm
         '
         Me.txtSyutubahyouURL.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtSyutubahyouURL.Location = New System.Drawing.Point(288, 26)
+        Me.txtSyutubahyouURL.Location = New System.Drawing.Point(270, 26)
         Me.txtSyutubahyouURL.Name = "txtSyutubahyouURL"
-        Me.txtSyutubahyouURL.Size = New System.Drawing.Size(558, 19)
+        Me.txtSyutubahyouURL.Size = New System.Drawing.Size(590, 19)
         Me.txtSyutubahyouURL.TabIndex = 0
         '
         'jikkouBar
@@ -95,28 +95,18 @@ Partial Class ShowForm
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvSyutubahyou.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvSyutubahyou.Location = New System.Drawing.Point(22, 51)
+        Me.dgvSyutubahyou.Location = New System.Drawing.Point(-3, 51)
         Me.dgvSyutubahyou.Name = "dgvSyutubahyou"
         Me.dgvSyutubahyou.ReadOnly = True
         Me.dgvSyutubahyou.RowTemplate.Height = 21
-        Me.dgvSyutubahyou.Size = New System.Drawing.Size(824, 450)
+        Me.dgvSyutubahyou.Size = New System.Drawing.Size(863, 450)
         Me.dgvSyutubahyou.TabIndex = 6
         Me.dgvSyutubahyou.TabStop = False
         '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(297, 6)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(243, 12)
-        Me.Label2.TabIndex = 7
-        Me.Label2.Text = "▼netkeiba.comの出馬表URLを入力してください。"
-        '
         'btnBrowserView
         '
-        Me.btnBrowserView.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnBrowserView.Enabled = False
-        Me.btnBrowserView.Location = New System.Drawing.Point(155, 1)
+        Me.btnBrowserView.Location = New System.Drawing.Point(137, 1)
         Me.btnBrowserView.Name = "btnBrowserView"
         Me.btnBrowserView.Size = New System.Drawing.Size(127, 23)
         Me.btnBrowserView.TabIndex = 8
@@ -126,9 +116,8 @@ Partial Class ShowForm
         '
         'btnCSVGridView
         '
-        Me.btnCSVGridView.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCSVGridView.Enabled = False
-        Me.btnCSVGridView.Location = New System.Drawing.Point(22, 1)
+        Me.btnCSVGridView.Location = New System.Drawing.Point(4, 1)
         Me.btnCSVGridView.Name = "btnCSVGridView"
         Me.btnCSVGridView.Size = New System.Drawing.Size(127, 23)
         Me.btnCSVGridView.TabIndex = 9
@@ -139,13 +128,22 @@ Partial Class ShowForm
         'btnCancel
         '
         Me.btnCancel.Enabled = False
-        Me.btnCancel.Location = New System.Drawing.Point(155, 24)
+        Me.btnCancel.Location = New System.Drawing.Point(137, 24)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(127, 23)
         Me.btnCancel.TabIndex = 10
         Me.btnCancel.TabStop = False
         Me.btnCancel.Text = "キャンセル（未実装）"
         Me.btnCancel.UseVisualStyleBackColor = True
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(281, 6)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(243, 12)
+        Me.Label2.TabIndex = 7
+        Me.Label2.Text = "▼netkeiba.comの出馬表URLを入力してください。"
         '
         'ShowForm
         '
@@ -175,9 +173,9 @@ Partial Class ShowForm
     Friend WithEvents Label1 As Label
     Public WithEvents jikkoumethod As TextBox
     Public WithEvents jikkouBar As ProgressBar
-    Friend WithEvents Label2 As Label
     Public WithEvents dgvSyutubahyou As DataGridView
     Friend WithEvents btnBrowserView As Button
     Friend WithEvents btnCSVGridView As Button
     Friend WithEvents btnCancel As Button
+    Friend WithEvents Label2 As Label
 End Class
