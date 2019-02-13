@@ -72,7 +72,7 @@ Public Class GetDBRaceInfo
         If reg_int.Replace(race_objDOC.DocumentNode.SelectNodes("//table[@class=""race_table_01 nk_tb_common""]/tr/td[1]").Item(sanshouNo).InnerText, "") <> "" Then
             juni.Add(Integer.Parse(race_objDOC.DocumentNode.SelectNodes("//table[@class=""race_table_01 nk_tb_common""]/tr/td[1]").Item(sanshouNo).InnerText))
         Else
-            juni.Add(99)   '中止などの場合はダミー値の99とする。
+            juni.Add(Nothing)
         End If
 
         'レースタイムを取得する
@@ -87,7 +87,11 @@ Public Class GetDBRaceInfo
         End If
 
         '体重を取得
-        weight.Add(Split(race_objDOC.DocumentNode.SelectNodes("//table[@class=""race_table_01 nk_tb_common""]/tr/td[12]").Item(sanshouNo).InnerText, "(")(0))
+        If IsNumeric(Split(race_objDOC.DocumentNode.SelectNodes("//table[@class=""race_table_01 nk_tb_common""]/tr/td[12]").Item(sanshouNo).InnerText, "(")(0)) Then
+            weight.Add(Split(race_objDOC.DocumentNode.SelectNodes("//table[@class=""race_table_01 nk_tb_common""]/tr/td[12]").Item(sanshouNo).InnerText, "(")(0))
+        Else
+            weight.Add(Nothing)
+        End If
 
 
         Return True

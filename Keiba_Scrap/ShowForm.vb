@@ -5,6 +5,7 @@ Public Class ShowForm
     Public gsInputCount As Integer = 0
     Public gsInputText As List(Of String) = New List(Of String)
     Public gsBackandGoFlg As Integer = 0
+    Public gsDefaultURL As String = "https://race.netkeiba.com/?pid=race&id=c201806050811&mode=shutuba"
 
 #Region "プロパティ"
     '別クラスから値を取得・設定するためのフィールドとプロパティ
@@ -50,8 +51,7 @@ Public Class ShowForm
     'フォームロード（初期値設定）
     Private Sub Fromload(sender As Object, e As EventArgs) Handles MyBase.Load
         JikkouMethodText = "初期画面"
-        Me.txtSyutubahyouURL.Text = "https://race.netkeiba.com/?pid=race&id=c201806050811&mode=shutuba"  '初期値サンプル
-        'Me.txtSyutubahyouURL.Text = "https://race.netkeiba.com/?pid=race&id=c201905010611&mode=shutuba"
+        Me.txtSyutubahyouURL.Text = gsDefaultURL  '初期値サンプル
         Me.dgvSyutubahyou.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
         Me.dgvSyutubahyou.SelectionMode = DataGridViewSelectionMode.FullRowSelect
     End Sub
@@ -118,36 +118,45 @@ Public Class ShowForm
         Me.jikkoumethod.Refresh()
     End Sub
 
-
+    'テキストボックス内で特定キーが押された場合
     Private Sub txtSyutubahyouURL_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSyutubahyouURL.KeyDown
+        'Enterキー
         If e.KeyCode = Keys.Enter Then
             Call btnGetSyutubahyou_Click(Me.btnGetSyutubahyou, e)
         End If
 
-
+        'Ctrl+Aキー
         If (e.Modifiers And Keys.Control) = Keys.Control AndAlso (e.KeyData And Keys.KeyCode) = Keys.A Then
             Me.txtSyutubahyouURL.SelectAll()
         End If
 
-    End Sub
-
-#Region "戻る、進む"
-    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        If gsInputCount > 0 Then
-            gsBackandGoFlg = 1
-            If gsInputCount = 1 Then
-                Me.txtSyutubahyouURL.Text = ""
-            Else
-                Me.txtSyutubahyouURL.Text = gsInputText(gsInputCount - 2)
+        'Ctrl+Zキー
+        If (e.Modifiers And Keys.Control) = Keys.Control AndAlso (e.KeyData And Keys.KeyCode) = Keys.Z Then
+            If gsInputCount > 0 Then
+                gsBackandGoFlg = 1
+                If gsInputCount = 1 Then
+                    Me.txtSyutubahyouURL.Text = gsDefaultURL
+                Else
+                    Me.txtSyutubahyouURL.Text = gsInputText(gsInputCount - 2)
+                End If
+                gsInputCount -= 1
             End If
-            gsInputText.Remove(gsInputCount - 1)
-            gsInputCount -= 1
         End If
-    End Sub
-    Private Sub btnGo_Click(sender As Object, e As EventArgs) Handles btnGo.Click
+
+        'Ctrl+Yキー
+        If (e.Modifiers And Keys.Control) = Keys.Control AndAlso (e.KeyData And Keys.KeyCode) = Keys.Y Then
+            If gsInputCount <= gsInputText.Count Then
+                gsBackandGoFlg = 1
+                If gsInputCount = gsInputText.Count Then
+                Else
+                    Me.txtSyutubahyouURL.Text = gsInputText(gsInputCount)
+                    gsInputText.Remove(gsInputCount - 1)
+                    gsInputCount += 1
+                End If
+            End If
+        End If
 
     End Sub
-#End Region
 
     Private Sub txtSyutubahyouURL_TextChanged(sender As Object, e As EventArgs) Handles txtSyutubahyouURL.TextChanged
         Try
