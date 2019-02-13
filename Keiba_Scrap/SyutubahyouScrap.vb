@@ -371,7 +371,7 @@ Public Class SyutubahyouScrap
         ShowForm.ShowFormInstance.DataGridSet = dt
 #End Region
 
-
+        Return True
     End Function
 
 

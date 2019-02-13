@@ -58,8 +58,29 @@ Public Class ShowForm
         Me.dgvSyutubahyou.SelectionMode = DataGridViewSelectionMode.FullRowSelect
     End Sub
 
+    'ブラウザ表示ボタン
+    Private Sub btnBrowserView_Click(sender As Object, e As EventArgs) Handles btnBrowserView.Click
+        Try
+            System.Diagnostics.Process.Start(Me.txtSyutubahyouURL.Text)
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            Me.txtSyutubahyouURL.Focus()
+        End Try
+    End Sub
 
-    'レース取得ボタンのクリック
+    'CSV出力ボタン
+    Private Sub btnCSVGridView_Click(sender As Object, e As EventArgs) Handles btnCSVGridView.Click
+        If MessageBox.Show("表示しているグリッドビューをCSV出力しますか？（未実装、処理なし）", "確認", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+        End If
+        Me.txtSyutubahyouURL.Focus()
+    End Sub
+
+    'キャンセルボタン
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        Me.txtSyutubahyouURL.Focus()
+    End Sub
+
+    'レース取得ボタン
     Private Sub btnGetSyutubahyou_Click(sender As Object, e As EventArgs) Handles btnGetSyutubahyou.Click
 
         If txtSyutubahyouURL.Text <> "" Then
@@ -71,6 +92,7 @@ Public Class ShowForm
                 JikkouMethodText = "処理開始" '実行中の処理を記載する。
                 DataGridSet = Nothing
                 Me.dgvSyutubahyou.Refresh()
+
                 If Not scrap.Scraping(txtSyutubahyouURL.Text) Then  'スクレイピングを実行する。
                     JikkouBarValue = 0
                     JikkouMethodText = "処理失敗"
@@ -114,6 +136,7 @@ Public Class ShowForm
             Me.btnCancel.Enabled = False
             Me.btnCSVGridView.Enabled = False
         End If
+        Me.txtSyutubahyouURL.Focus()
     End Sub
 
     '
@@ -217,21 +240,6 @@ Public Class ShowForm
         Else
             Me.btnBrowserView.Enabled = False
         End If
-    End Sub
-
-    Private Sub btnBrowserView_Click(sender As Object, e As EventArgs) Handles btnBrowserView.Click
-        Try
-            System.Diagnostics.Process.Start(Me.txtSyutubahyouURL.Text)
-        Catch ex As Exception
-            MessageBox.Show(ex.ToString)
-        End Try
-    End Sub
-
-    Private Sub btnCSVGridView_Click(sender As Object, e As EventArgs) Handles btnCSVGridView.Click
-        If MessageBox.Show("表示しているグリッドビューをCSV出力しますか？（未実装、処理なし）", "確認", MessageBoxButtons.YesNo) = DialogResult.Yes Then
-
-        End If
-
     End Sub
 
 
