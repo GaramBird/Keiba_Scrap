@@ -120,7 +120,7 @@ Public Class SyutubahyouScrap
         syutubahyou_objDOC = New HtmlAgilityPack.HtmlDocument()
         syutubahyou_objDOC.LoadHtml(syutubahyou_html)
 
-        '取得したURLのレース名を取得する。
+        '取得したURLのレース名を取得検証する。
         Try
             ShowForm.ShowFormInstance.JikkouMethodText = "レース名の取得検証" '実行中の処理を記載する。
             syutubahyou_objDOC.DocumentNode.SelectNodes("//div[@class=""data_intro""]/dl/dd/h1").Item(0).InnerText.Replace("&nbsp;", "")
@@ -153,7 +153,7 @@ Public Class SyutubahyouScrap
             racehassou = New TimeSpan(Split(racewetherinfo(3), ":")(0), Split(racewetherinfo(3), ":")(1), 0)
         End If
 
-#Region "スクレイピングデータテーブル"
+#Region "予想レース情報データテーブル"
         '取得したスクレイピングデータをデータグリッドビューのデータソースへとセットする。
         Dim dtRace = New DataTable("予想レース情報データテーブル")
 
@@ -204,7 +204,6 @@ Public Class SyutubahyouScrap
             ShowForm.ShowFormInstance.JikkouMethodText = "レース名の取得検証" '実行中の処理を記載する。
             syutubahyou_objDOC.DocumentNode.SelectNodes("//div[@class=""data_intro""]/dl/dd/h1").Item(0).InnerText.Replace("&nbsp;", "")
             For Each row In syutubahyou_objDOC.DocumentNode.SelectNodes("//table[@class=""race_table_01 nk_tb_common shutuba_table""]/tr/td[@class=""umaban""]")
-                h_umaban.Add(Integer.Parse(row.InnerText))
             Next
         Catch ex As Exception
             MessageBox.Show("馬番の取得に失敗しました。馬番が発表された後にURLを取得してください。")

@@ -63,7 +63,7 @@ Partial Class ShowForm
         '
         Me.jikkouBar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.jikkouBar.Location = New System.Drawing.Point(-3, 568)
+        Me.jikkouBar.Location = New System.Drawing.Point(-3, 540)
         Me.jikkouBar.Maximum = 150
         Me.jikkouBar.Name = "jikkouBar"
         Me.jikkouBar.Size = New System.Drawing.Size(889, 13)
@@ -75,7 +75,7 @@ Partial Class ShowForm
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.jikkoumethod.BackColor = System.Drawing.SystemColors.Control
         Me.jikkoumethod.Enabled = False
-        Me.jikkoumethod.Location = New System.Drawing.Point(61, 548)
+        Me.jikkoumethod.Location = New System.Drawing.Point(61, 520)
         Me.jikkoumethod.Margin = New System.Windows.Forms.Padding(0)
         Me.jikkoumethod.Name = "jikkoumethod"
         Me.jikkoumethod.ReadOnly = True
@@ -88,7 +88,7 @@ Partial Class ShowForm
         Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(2, 551)
+        Me.Label1.Location = New System.Drawing.Point(2, 523)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(56, 12)
         Me.Label1.TabIndex = 5
@@ -99,11 +99,11 @@ Partial Class ShowForm
         Me.dgvSyutubahyou.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvSyutubahyou.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvSyutubahyou.Location = New System.Drawing.Point(4, 102)
+        Me.dgvSyutubahyou.Location = New System.Drawing.Point(4, 92)
         Me.dgvSyutubahyou.Name = "dgvSyutubahyou"
         Me.dgvSyutubahyou.ReadOnly = True
         Me.dgvSyutubahyou.RowTemplate.Height = 21
-        Me.dgvSyutubahyou.Size = New System.Drawing.Size(889, 443)
+        Me.dgvSyutubahyou.Size = New System.Drawing.Size(880, 426)
         Me.dgvSyutubahyou.TabIndex = 6
         Me.dgvSyutubahyou.TabStop = False
         '
@@ -169,7 +169,7 @@ Partial Class ShowForm
         Me.dgvYosouRace.Name = "dgvYosouRace"
         Me.dgvYosouRace.ReadOnly = True
         Me.dgvYosouRace.RowTemplate.Height = 21
-        Me.dgvYosouRace.Size = New System.Drawing.Size(889, 43)
+        Me.dgvYosouRace.Size = New System.Drawing.Size(880, 40)
         Me.dgvYosouRace.TabIndex = 12
         Me.dgvYosouRace.TabStop = False
         '
@@ -177,7 +177,7 @@ Partial Class ShowForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(884, 583)
+        Me.ClientSize = New System.Drawing.Size(884, 555)
         Me.Controls.Add(Me.dgvYosouRace)
         Me.Controls.Add(Me.btnAiLogic)
         Me.Controls.Add(Me.btnCancel)

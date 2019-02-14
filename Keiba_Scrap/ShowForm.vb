@@ -106,12 +106,16 @@ Public Class ShowForm
                 JikkouMethodText = "処理開始" '実行中の処理を記載する。
                 SyutubahyouDataGridSet = Nothing
                 Me.dgvSyutubahyou.Refresh()
+                YosouRaceDataGridSet = Nothing
+                Me.dgvYosouRace.Refresh()
 
                 If Not scrap.Scraping(txtSyutubahyouURL.Text) Then  'スクレイピングを実行する。
                     JikkouBarValue = 0
                     JikkouMethodText = "処理失敗"
                     Me.btnGetSyutubahyou.Enabled = True
                     Me.btnCancel.Enabled = False
+                    Me.dgvSyutubahyou.CurrentCell = Nothing
+                    Me.dgvYosouRace.CurrentCell = Nothing
                     Exit Sub
                 End If
 
@@ -153,6 +157,8 @@ Public Class ShowForm
             Me.btnAiLogic.Enabled = False
         End If
         Me.txtSyutubahyouURL.Focus()
+        Me.dgvSyutubahyou.CurrentCell = Nothing
+        Me.dgvYosouRace.CurrentCell = Nothing
     End Sub
 
     '
