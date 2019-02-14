@@ -81,6 +81,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AiLogical.vb" />
     <Compile Include="StartClass.vb" />
     <Compile Include="GetDBRaceInfo.vb" />
     <Compile Include="SyutubahyouScrap.vb" />
@@ -132,6 +133,7 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="ロジック思案.docx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
