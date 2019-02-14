@@ -36,7 +36,7 @@ Public Class ShowForm
         End Set
     End Property
 
-    Public Property DataGridSet() As DataTable
+    Public Property SyutubahyouDataGridSet() As DataTable
         Get
             Return dgvSyutubahyou.DataSource
         End Get
@@ -44,6 +44,16 @@ Public Class ShowForm
             dgvSyutubahyou.DataSource = Value
         End Set
     End Property
+
+    Public Property YosouRaceDataGridSet() As DataTable
+        Get
+            Return dgvYosouRace.DataSource
+        End Get
+        Set(ByVal Value As DataTable)
+            dgvYosouRace.DataSource = Value
+        End Set
+    End Property
+
 #End Region
 
 
@@ -51,11 +61,14 @@ Public Class ShowForm
     'フォームロード（初期値設定）
     Private Sub Fromload(sender As Object, e As EventArgs) Handles MyBase.Load
         JikkouMethodText = "初期画面"
-        Me.MinimumSize = New Size(700, 570)
+        'Me.MinimumSize = New Size(700, 570)
         Me.txtSyutubahyouURL.Text = gsDefaultURL  '初期値サンプル
         Me.txtSyutubahyouURL.SelectAll()
         Me.dgvSyutubahyou.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
         Me.dgvSyutubahyou.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+        Me.dgvSyutubahyou.AllowUserToAddRows = False
+        Me.dgvYosouRace.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+        Me.dgvYosouRace.AllowUserToAddRows = False
     End Sub
 
     'ブラウザ表示ボタン
@@ -88,9 +101,10 @@ Public Class ShowForm
                 Me.btnGetSyutubahyou.Enabled = False
                 Me.btnCancel.Enabled = True
                 Me.btnCSVGridView.Enabled = False
+                Me.btnAiLogic.Enabled = False
                 JikkouBarValue += 1  '実行ステータスバーを加算する。
                 JikkouMethodText = "処理開始" '実行中の処理を記載する。
-                DataGridSet = Nothing
+                SyutubahyouDataGridSet = Nothing
                 Me.dgvSyutubahyou.Refresh()
 
                 If Not scrap.Scraping(txtSyutubahyouURL.Text) Then  'スクレイピングを実行する。
@@ -131,10 +145,12 @@ Public Class ShowForm
             Me.btnGetSyutubahyou.Enabled = True
             Me.btnCancel.Enabled = False
             Me.btnCSVGridView.Enabled = True
+            Me.btnAiLogic.Enabled = True
         Else
             Me.btnGetSyutubahyou.Enabled = False
             Me.btnCancel.Enabled = False
             Me.btnCSVGridView.Enabled = False
+            Me.btnAiLogic.Enabled = False
         End If
         Me.txtSyutubahyouURL.Focus()
     End Sub

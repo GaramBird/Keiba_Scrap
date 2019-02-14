@@ -1,5 +1,10 @@
 ﻿Public Class AiLogical
     '各項目について期待値を算出するメソッドを記述するクラス
+    'netkeiba.comからスクレイピングしたデータテーブルを取得する。
+    Public GetData As SyutubahyouScrap = New SyutubahyouScrap
+
+
+
 
     '○競馬予想ロジック思案
     'カテゴリ：状態：影響：結果

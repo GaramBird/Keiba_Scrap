@@ -99,7 +99,6 @@ Public Class SyutubahyouScrap
         objWC.Encoding = System.Text.Encoding.GetEncoding("euc-jp")
 
         'URL捜査準備
-        'Dim syutubahyou_url As String = "https://race.netkeiba.com/?pid=race&id=c201806050811&mode=shutuba"    'sampleURL（2018年有馬記念）
         Dim syutubahyou_url As String = syutubahyouurl
         Dim syutubahyou_html As String
         Dim syutubahyou_objDOC As HtmlAgilityPack.HtmlDocument
@@ -131,7 +130,52 @@ Public Class SyutubahyouScrap
             End If
             Return False
         End Try
+        '予想レースの情報を取得する
+
+        Dim racebashoinfo = syutubahyou_objDOC.DocumentNode.SelectNodes("//div[@class=""race_otherdata""]/p").Item(0).InnerText
+        Dim racebasho = racebashoinfo.Substring(racebashoinfo.IndexOf("回") + 1, 2)
         Dim racename = syutubahyou_objDOC.DocumentNode.SelectNodes("//div[@class=""data_intro""]/dl/dd/h1").Item(0).InnerText.Replace("&nbsp;", "")
+        Dim racebabainfo = syutubahyou_objDOC.DocumentNode.SelectNodes("//div[@class=""data_intro""]/dl/dd/p").Item(0).InnerText
+        Dim racebaba = racebabainfo.Substring(0, 1)
+        Dim racenagasa As Integer = reg_int.Replace(racebabainfo.Substring(1), "")
+        Dim racemawari = racebabainfo.Substring(racebabainfo.IndexOf("(") + 1, 1) & "回り"
+        Dim racewetherinfo() = Split(syutubahyou_objDOC.DocumentNode.SelectNodes("//div[@class=""data_intro""]/dl/dd/p").Item(1).InnerText, "：")
+        Dim racewether As String = "未発表"
+        Dim racebabastutas = "未発表"
+        Dim racehassou As TimeSpan = New TimeSpan(0, 0, 0)
+        If racewetherinfo(1).IndexOf("&nbsp;") <> 0 Then
+            racewether = racewetherinfo(1).Substring(0, racewetherinfo(1).IndexOf("&nbsp;"))
+        End If
+        If racewetherinfo(2).IndexOf("&nbsp;") <> 0 Then
+            racebabastutas = racewetherinfo(2).Substring(0, racewetherinfo(2).IndexOf("&nbsp;"))
+        End If
+        If racewetherinfo(3).Length <> 0 Then
+            racehassou = New TimeSpan(Split(racewetherinfo(3), ":")(0), Split(racewetherinfo(3), ":")(1), 0)
+        End If
+
+#Region "スクレイピングデータテーブル"
+        '取得したスクレイピングデータをデータグリッドビューのデータソースへとセットする。
+        Dim dtRace = New DataTable("予想レース情報データテーブル")
+
+        dtRace.Columns.Add("開催地", GetType(String))
+        dtRace.Columns.Add("レース名", GetType(String))
+        dtRace.Columns.Add("天気", GetType(String))
+        dtRace.Columns.Add("馬場", GetType(String))
+        dtRace.Columns.Add("馬場状況", GetType(String))
+        dtRace.Columns.Add("長さ", GetType(Integer))
+        dtRace.Columns.Add("回り", GetType(String))
+        dtRace.Columns.Add("発走", GetType(TimeSpan))
+
+        dtRace.Rows.Add(racebasho, racename, racewether, racebaba, racebabastutas, racenagasa, racemawari, racehassou)
+#End Region
+
+
+#Region "グリッドビュー設定"
+        ShowForm.ShowFormInstance.YosouRaceDataGridSet = dtRace
+        ShowForm.dgvYosouRace.Refresh()
+#End Region
+
+
 
         '予想紙の有無によって参照するTDインデックスを変化させる。
         Dim colCount As Integer = 1
@@ -154,12 +198,24 @@ Public Class SyutubahyouScrap
         '馬番を取得して出馬表から取得するナンバリングを取得する。
         ShowForm.ShowFormInstance.JikkouBarValue += 1    '実行ステータスバーを加算する。
         ShowForm.ShowFormInstance.JikkouMethodText = "馬番を取得" '実行中の処理を記載する。
+
+        '取得したURLのレースの馬番を取得検証する。
+        Try
+            ShowForm.ShowFormInstance.JikkouMethodText = "レース名の取得検証" '実行中の処理を記載する。
+            syutubahyou_objDOC.DocumentNode.SelectNodes("//div[@class=""data_intro""]/dl/dd/h1").Item(0).InnerText.Replace("&nbsp;", "")
+            For Each row In syutubahyou_objDOC.DocumentNode.SelectNodes("//table[@class=""race_table_01 nk_tb_common shutuba_table""]/tr/td[@class=""umaban""]")
+                h_umaban.Add(Integer.Parse(row.InnerText))
+            Next
+        Catch ex As Exception
+            MessageBox.Show("馬番の取得に失敗しました。馬番が発表された後にURLを取得してください。")
+            Return False
+        End Try
+
+
+
         For Each row In syutubahyou_objDOC.DocumentNode.SelectNodes("//table[@class=""race_table_01 nk_tb_common shutuba_table""]/tr/td[@class=""umaban""]")
             h_umaban.Add(Integer.Parse(row.InnerText))
         Next
-
-
-
 
         'テーブル取得を行う。
         For Each temp_h_umaban In h_umaban
@@ -282,15 +338,10 @@ Public Class SyutubahyouScrap
             Next
         Next
 
-        ShowForm.ShowFormInstance.JikkouMethodText = "「" & racename & "」情報を表示しています。" '実行中の処理を記載する。
-        ShowForm.ShowFormInstance.JikkouBarValue = ShowForm.jikkouBar.Maximum    '実行ステータスバーを加算する。
-        MessageBox.Show("出馬表のスクレイピングが完了しました。")
-
 
 #Region "スクレイピングデータテーブル"
         '取得したスクレイピングデータをデータグリッドビューのデータソースへとセットする。
-        Dim ds = New DataSet("スクレイピングデータセット")
-        Dim dt = New DataTable("スクレイピングデータテーブル")
+        Dim dt = New DataTable("出馬表データテーブル")
 
         dt.Columns.Add("馬番", GetType(Integer))
         dt.Columns.Add("馬名", GetType(String))
@@ -368,8 +419,13 @@ Public Class SyutubahyouScrap
 
 
 #Region "グリッドビュー設定"
-        ShowForm.ShowFormInstance.DataGridSet = dt
+        ShowForm.ShowFormInstance.SyutubahyouDataGridSet = dt
 #End Region
+
+        ShowForm.ShowFormInstance.JikkouMethodText = "「" & racename & "」情報を表示しています。" '実行中の処理を記載する。
+        ShowForm.ShowFormInstance.JikkouBarValue = ShowForm.jikkouBar.Maximum    '実行ステータスバーを加算する。
+        MessageBox.Show("出馬表のスクレイピングが完了しました。")
+
 
         Return True
     End Function
