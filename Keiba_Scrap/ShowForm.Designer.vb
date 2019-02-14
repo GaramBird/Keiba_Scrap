@@ -33,7 +33,10 @@ Partial Class ShowForm
         Me.btnCSVGridView = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.btnAiLogic = New System.Windows.Forms.Button()
+        Me.dgvYosouRace = New System.Windows.Forms.DataGridView()
         CType(Me.dgvSyutubahyou, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgvYosouRace, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnGetSyutubahyou
@@ -60,7 +63,7 @@ Partial Class ShowForm
         '
         Me.jikkouBar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.jikkouBar.Location = New System.Drawing.Point(-3, 517)
+        Me.jikkouBar.Location = New System.Drawing.Point(-3, 568)
         Me.jikkouBar.Maximum = 150
         Me.jikkouBar.Name = "jikkouBar"
         Me.jikkouBar.Size = New System.Drawing.Size(889, 13)
@@ -72,7 +75,7 @@ Partial Class ShowForm
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.jikkoumethod.BackColor = System.Drawing.SystemColors.Control
         Me.jikkoumethod.Enabled = False
-        Me.jikkoumethod.Location = New System.Drawing.Point(61, 497)
+        Me.jikkoumethod.Location = New System.Drawing.Point(61, 548)
         Me.jikkoumethod.Margin = New System.Windows.Forms.Padding(0)
         Me.jikkoumethod.Name = "jikkoumethod"
         Me.jikkoumethod.ReadOnly = True
@@ -85,7 +88,7 @@ Partial Class ShowForm
         Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(2, 500)
+        Me.Label1.Location = New System.Drawing.Point(2, 551)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(56, 12)
         Me.Label1.TabIndex = 5
@@ -93,11 +96,10 @@ Partial Class ShowForm
         '
         'dgvSyutubahyou
         '
-        Me.dgvSyutubahyou.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.dgvSyutubahyou.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvSyutubahyou.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvSyutubahyou.Location = New System.Drawing.Point(-3, 51)
+        Me.dgvSyutubahyou.Location = New System.Drawing.Point(4, 102)
         Me.dgvSyutubahyou.Name = "dgvSyutubahyou"
         Me.dgvSyutubahyou.ReadOnly = True
         Me.dgvSyutubahyou.RowTemplate.Height = 21
@@ -147,11 +149,37 @@ Partial Class ShowForm
         Me.Label2.TabIndex = 7
         Me.Label2.Text = "▼netkeiba.comの出馬表URLを入力してください。"
         '
+        'btnAiLogic
+        '
+        Me.btnAiLogic.Enabled = False
+        Me.btnAiLogic.Location = New System.Drawing.Point(745, 1)
+        Me.btnAiLogic.Name = "btnAiLogic"
+        Me.btnAiLogic.Size = New System.Drawing.Size(127, 23)
+        Me.btnAiLogic.TabIndex = 11
+        Me.btnAiLogic.TabStop = False
+        Me.btnAiLogic.Text = "期待値算出（AI）"
+        Me.btnAiLogic.UseVisualStyleBackColor = True
+        '
+        'dgvYosouRace
+        '
+        Me.dgvYosouRace.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgvYosouRace.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvYosouRace.Location = New System.Drawing.Point(4, 53)
+        Me.dgvYosouRace.Name = "dgvYosouRace"
+        Me.dgvYosouRace.ReadOnly = True
+        Me.dgvYosouRace.RowTemplate.Height = 21
+        Me.dgvYosouRace.Size = New System.Drawing.Size(889, 43)
+        Me.dgvYosouRace.TabIndex = 12
+        Me.dgvYosouRace.TabStop = False
+        '
         'ShowForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(884, 532)
+        Me.ClientSize = New System.Drawing.Size(884, 583)
+        Me.Controls.Add(Me.dgvYosouRace)
+        Me.Controls.Add(Me.btnAiLogic)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnCSVGridView)
         Me.Controls.Add(Me.btnBrowserView)
@@ -166,6 +194,7 @@ Partial Class ShowForm
         Me.Name = "ShowForm"
         Me.Text = "Form1"
         CType(Me.dgvSyutubahyou, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvYosouRace, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -181,4 +210,6 @@ Partial Class ShowForm
     Friend WithEvents btnCSVGridView As Button
     Friend WithEvents btnCancel As Button
     Friend WithEvents Label2 As Label
+    Friend WithEvents btnAiLogic As Button
+    Public WithEvents dgvYosouRace As DataGridView
 End Class
