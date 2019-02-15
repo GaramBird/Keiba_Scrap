@@ -46,7 +46,21 @@ Public Class GetDBRaceInfo
 
         'レース馬場情報を取得する。
         Dim babainfo() = Split(raceinfo.SelectNodes("//dl[@class=""racedata fc""]/dd/diary_snap_cut/span").Item(0).InnerText.Replace("&nbsp;", "").Trim(), "/")
-        baba.Add(babainfo(0).Substring(0, 1))
+        Dim temp_racebaba = babainfo(0).Substring(0, 1)
+        Dim racebaba As String
+        Select Case temp_racebaba
+            Case "芝"
+                baba.Add("芝")
+            Case "ダ"
+                baba.Add("ダート")
+            Case "障"
+                Select Case babainfo(0).Substring(1, 1)
+                    Case "芝"
+                        baba.Add("障害芝")
+                    Case "ダ"
+                        baba.Add("障害ダート")
+                End Select
+        End Select
         nagasa.Add(reg_int.Replace(babainfo(0).Substring(0, babainfo(0).IndexOf("m")), ""))
         wether.Add(babainfo(1).Substring(babainfo(1).IndexOf(":") + 1))
         baba_status.Add(babainfo(2).Substring(babainfo(2).IndexOf(":") + 1))

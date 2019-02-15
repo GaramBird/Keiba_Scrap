@@ -35,7 +35,6 @@ Partial Class ShowForm
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnAiLogic = New System.Windows.Forms.Button()
         Me.dgvYosouRace = New System.Windows.Forms.DataGridView()
-        Me.btnDammy = New System.Windows.Forms.Button()
         CType(Me.dgvSyutubahyou, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvYosouRace, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -174,21 +173,11 @@ Partial Class ShowForm
         Me.dgvYosouRace.TabIndex = 12
         Me.dgvYosouRace.TabStop = False
         '
-        'btnDammy
-        '
-        Me.btnDammy.Location = New System.Drawing.Point(873, 3)
-        Me.btnDammy.Name = "btnDammy"
-        Me.btnDammy.Size = New System.Drawing.Size(10, 23)
-        Me.btnDammy.TabIndex = 13
-        Me.btnDammy.UseVisualStyleBackColor = True
-        '
         'ShowForm
         '
-        Me.AcceptButton = Me.btnDammy
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(884, 555)
-        Me.Controls.Add(Me.btnDammy)
         Me.Controls.Add(Me.dgvYosouRace)
         Me.Controls.Add(Me.btnAiLogic)
         Me.Controls.Add(Me.btnCancel)
@@ -223,5 +212,4 @@ Partial Class ShowForm
     Friend WithEvents Label2 As Label
     Friend WithEvents btnAiLogic As Button
     Public WithEvents dgvYosouRace As DataGridView
-    Friend WithEvents btnDammy As Button
 End Class
