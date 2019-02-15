@@ -83,8 +83,8 @@ Public Class ShowForm
 
     'CSV出力ボタン
     Private Sub btnCSVGridView_Click(sender As Object, e As EventArgs) Handles btnCSVGridView.Click
-        If MessageBox.Show("表示しているグリッドビューをCSV出力しますか？（未実装、処理なし）", "確認", MessageBoxButtons.YesNo) = DialogResult.Yes Then
-        End If
+        'If MessageBox.Show("表示しているグリッドビューをCSV出力しますか？（未実装、処理なし）", "確認", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+        'End If
         Me.txtSyutubahyouURL.Focus()
     End Sub
 
