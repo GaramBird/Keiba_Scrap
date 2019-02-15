@@ -46,9 +46,7 @@ Public Class GetDBRaceInfo
 
         'レース馬場情報を取得する。
         Dim babainfo() = Split(raceinfo.SelectNodes("//dl[@class=""racedata fc""]/dd/diary_snap_cut/span").Item(0).InnerText.Replace("&nbsp;", "").Trim(), "/")
-        Dim temp_racebaba = babainfo(0).Substring(0, 1)
-        Dim racebaba As String
-        Select Case temp_racebaba
+        Select Case babainfo(0).Substring(0, 1)
             Case "芝"
                 baba.Add("芝")
             Case "ダ"
@@ -62,8 +60,24 @@ Public Class GetDBRaceInfo
                 End Select
         End Select
         nagasa.Add(reg_int.Replace(babainfo(0).Substring(0, babainfo(0).IndexOf("m")), ""))
-        wether.Add(babainfo(1).Substring(babainfo(1).IndexOf(":") + 1))
-        baba_status.Add(babainfo(2).Substring(babainfo(2).IndexOf(":") + 1))
+        wether.Add(babainfo(1).Substring(babainfo(1).IndexOf(":") + 1).Trim())
+
+        '何だこの条件...（何故か両方の馬場状況が記載されている場合）
+        If babainfo(2).IndexOf("芝") >= 0 AndAlso babainfo(2).IndexOf("ダート") >= 0 Then
+            Dim findsiba = babainfo(2).Replace("&nbsp;", "").IndexOf("芝") + 2
+            Dim finddart = babainfo(2).Replace("&nbsp;", "").IndexOf("ダート") - 2
+            If baba(baba.Count - 1).IndexOf("芝") >= 0 Then
+                baba_status.Add(babainfo(2).Replace("&nbsp;", "").Substring(findsiba + 2, finddart - findsiba).Trim())
+            ElseIf baba(baba.Count - 1).IndexOf("ダート") >= 0 Then
+                baba_status.Add(babainfo(2).Replace("&nbsp;", "").Substring((finddart + 2) + 6).Trim())
+            Else
+                baba_status.Add("")
+            End If
+        Else
+            '通常の馬場状況取得
+            baba_status.Add(babainfo(2).Substring(babainfo(2).IndexOf(":") + 1).Trim())
+        End If
+
 
         'レース場所情報を取得する。
         Dim bashoinfo = raceinfo.SelectNodes("//p[@class=""smalltxt""]").Item(0).InnerText.Trim()

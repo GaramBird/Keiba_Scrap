@@ -217,7 +217,7 @@ Public Class SyutubahyouScrap
             For Each row In syutubahyou_objDOC.DocumentNode.SelectNodes("//table[@class=""race_table_01 nk_tb_common shutuba_table""]/tr/td[@class=""umaban""]")
             Next
         Catch ex As Exception
-            MessageBox.Show("馬番の取得に失敗しました。馬番を含まない出馬表データを取得します。")
+            'MessageBox.Show("馬番の取得に失敗しました。馬番を含まない出馬表データを取得します。")
             If Scraping_Numberless(racename, syutubahyouurl) Then
                 Return True
             Else
