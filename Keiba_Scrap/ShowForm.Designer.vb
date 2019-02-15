@@ -22,6 +22,7 @@ Partial Class ShowForm
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ShowForm))
         Me.btnGetSyutubahyou = New System.Windows.Forms.Button()
         Me.txtSyutubahyouURL = New System.Windows.Forms.TextBox()
@@ -35,13 +36,20 @@ Partial Class ShowForm
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnAiLogic = New System.Windows.Forms.Button()
         Me.dgvYosouRace = New System.Windows.Forms.DataGridView()
+        Me.cmsForm = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.年12月有馬記念サンプルToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.レース情報を取得ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.閉じるToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TopLink = New System.Windows.Forms.Panel()
         CType(Me.dgvSyutubahyou, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvYosouRace, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.cmsForm.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnGetSyutubahyou
         '
-        Me.btnGetSyutubahyou.Location = New System.Drawing.Point(4, 24)
+        Me.btnGetSyutubahyou.Location = New System.Drawing.Point(64, 26)
         Me.btnGetSyutubahyou.Name = "btnGetSyutubahyou"
         Me.btnGetSyutubahyou.Size = New System.Drawing.Size(127, 23)
         Me.btnGetSyutubahyou.TabIndex = 1
@@ -54,9 +62,9 @@ Partial Class ShowForm
         Me.txtSyutubahyouURL.AllowDrop = True
         Me.txtSyutubahyouURL.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtSyutubahyouURL.Location = New System.Drawing.Point(270, 26)
+        Me.txtSyutubahyouURL.Location = New System.Drawing.Point(330, 26)
         Me.txtSyutubahyouURL.Name = "txtSyutubahyouURL"
-        Me.txtSyutubahyouURL.Size = New System.Drawing.Size(616, 19)
+        Me.txtSyutubahyouURL.Size = New System.Drawing.Size(553, 19)
         Me.txtSyutubahyouURL.TabIndex = 0
         '
         'jikkouBar
@@ -66,7 +74,7 @@ Partial Class ShowForm
         Me.jikkouBar.Location = New System.Drawing.Point(-3, 540)
         Me.jikkouBar.Maximum = 150
         Me.jikkouBar.Name = "jikkouBar"
-        Me.jikkouBar.Size = New System.Drawing.Size(889, 13)
+        Me.jikkouBar.Size = New System.Drawing.Size(886, 13)
         Me.jikkouBar.TabIndex = 3
         '
         'jikkoumethod
@@ -79,7 +87,7 @@ Partial Class ShowForm
         Me.jikkoumethod.Margin = New System.Windows.Forms.Padding(0)
         Me.jikkoumethod.Name = "jikkoumethod"
         Me.jikkoumethod.ReadOnly = True
-        Me.jikkoumethod.Size = New System.Drawing.Size(825, 19)
+        Me.jikkoumethod.Size = New System.Drawing.Size(822, 19)
         Me.jikkoumethod.TabIndex = 4
         Me.jikkoumethod.TabStop = False
         '
@@ -99,18 +107,19 @@ Partial Class ShowForm
         Me.dgvSyutubahyou.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvSyutubahyou.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvSyutubahyou.Location = New System.Drawing.Point(4, 92)
+        Me.dgvSyutubahyou.Location = New System.Drawing.Point(2, 91)
         Me.dgvSyutubahyou.Name = "dgvSyutubahyou"
         Me.dgvSyutubahyou.ReadOnly = True
         Me.dgvSyutubahyou.RowTemplate.Height = 21
-        Me.dgvSyutubahyou.Size = New System.Drawing.Size(880, 426)
+        Me.dgvSyutubahyou.Size = New System.Drawing.Size(877, 426)
         Me.dgvSyutubahyou.TabIndex = 6
         Me.dgvSyutubahyou.TabStop = False
         '
         'btnBrowserView
         '
+        Me.btnBrowserView.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnBrowserView.Enabled = False
-        Me.btnBrowserView.Location = New System.Drawing.Point(137, 1)
+        Me.btnBrowserView.Location = New System.Drawing.Point(752, 1)
         Me.btnBrowserView.Name = "btnBrowserView"
         Me.btnBrowserView.Size = New System.Drawing.Size(127, 23)
         Me.btnBrowserView.TabIndex = 8
@@ -121,7 +130,7 @@ Partial Class ShowForm
         'btnCSVGridView
         '
         Me.btnCSVGridView.Enabled = False
-        Me.btnCSVGridView.Location = New System.Drawing.Point(4, 1)
+        Me.btnCSVGridView.Location = New System.Drawing.Point(64, 3)
         Me.btnCSVGridView.Name = "btnCSVGridView"
         Me.btnCSVGridView.Size = New System.Drawing.Size(127, 23)
         Me.btnCSVGridView.TabIndex = 9
@@ -132,7 +141,7 @@ Partial Class ShowForm
         'btnCancel
         '
         Me.btnCancel.Enabled = False
-        Me.btnCancel.Location = New System.Drawing.Point(137, 24)
+        Me.btnCancel.Location = New System.Drawing.Point(197, 26)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(127, 23)
         Me.btnCancel.TabIndex = 10
@@ -143,7 +152,7 @@ Partial Class ShowForm
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(281, 6)
+        Me.Label2.Location = New System.Drawing.Point(330, 6)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(243, 12)
         Me.Label2.TabIndex = 7
@@ -152,7 +161,7 @@ Partial Class ShowForm
         'btnAiLogic
         '
         Me.btnAiLogic.Enabled = False
-        Me.btnAiLogic.Location = New System.Drawing.Point(745, 1)
+        Me.btnAiLogic.Location = New System.Drawing.Point(197, 3)
         Me.btnAiLogic.Name = "btnAiLogic"
         Me.btnAiLogic.Size = New System.Drawing.Size(127, 23)
         Me.btnAiLogic.TabIndex = 11
@@ -169,15 +178,55 @@ Partial Class ShowForm
         Me.dgvYosouRace.Name = "dgvYosouRace"
         Me.dgvYosouRace.ReadOnly = True
         Me.dgvYosouRace.RowTemplate.Height = 21
-        Me.dgvYosouRace.Size = New System.Drawing.Size(880, 40)
+        Me.dgvYosouRace.Size = New System.Drawing.Size(877, 40)
         Me.dgvYosouRace.TabIndex = 12
         Me.dgvYosouRace.TabStop = False
+        '
+        'cmsForm
+        '
+        Me.cmsForm.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.年12月有馬記念サンプルToolStripMenuItem, Me.レース情報を取得ToolStripMenuItem, Me.ToolStripMenuItem1, Me.閉じるToolStripMenuItem})
+        Me.cmsForm.Name = "cmsForm"
+        Me.cmsForm.Size = New System.Drawing.Size(263, 76)
+        '
+        '年12月有馬記念サンプルToolStripMenuItem
+        '
+        Me.年12月有馬記念サンプルToolStripMenuItem.Name = "年12月有馬記念サンプルToolStripMenuItem"
+        Me.年12月有馬記念サンプルToolStripMenuItem.Size = New System.Drawing.Size(262, 22)
+        Me.年12月有馬記念サンプルToolStripMenuItem.Text = "2018年12月有馬記念（サンプル）"
+        '
+        'レース情報を取得ToolStripMenuItem
+        '
+        Me.レース情報を取得ToolStripMenuItem.Name = "レース情報を取得ToolStripMenuItem"
+        Me.レース情報を取得ToolStripMenuItem.Size = New System.Drawing.Size(262, 22)
+        Me.レース情報を取得ToolStripMenuItem.Text = "レース情報を取得"
+        '
+        'ToolStripMenuItem1
+        '
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(259, 6)
+        '
+        '閉じるToolStripMenuItem
+        '
+        Me.閉じるToolStripMenuItem.Name = "閉じるToolStripMenuItem"
+        Me.閉じるToolStripMenuItem.Size = New System.Drawing.Size(262, 22)
+        Me.閉じるToolStripMenuItem.Text = "閉じる"
+        '
+        'TopLink
+        '
+        Me.TopLink.BackgroundImage = CType(resources.GetObject("TopLink.BackgroundImage"), System.Drawing.Image)
+        Me.TopLink.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.TopLink.Location = New System.Drawing.Point(7, 4)
+        Me.TopLink.Name = "TopLink"
+        Me.TopLink.Size = New System.Drawing.Size(54, 44)
+        Me.TopLink.TabIndex = 13
         '
         'ShowForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(884, 555)
+        Me.ClientSize = New System.Drawing.Size(881, 555)
+        Me.ContextMenuStrip = Me.cmsForm
+        Me.Controls.Add(Me.TopLink)
         Me.Controls.Add(Me.dgvYosouRace)
         Me.Controls.Add(Me.btnAiLogic)
         Me.Controls.Add(Me.btnCancel)
@@ -195,6 +244,7 @@ Partial Class ShowForm
         Me.Text = "Form1"
         CType(Me.dgvSyutubahyou, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvYosouRace, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.cmsForm.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -212,4 +262,10 @@ Partial Class ShowForm
     Friend WithEvents Label2 As Label
     Friend WithEvents btnAiLogic As Button
     Public WithEvents dgvYosouRace As DataGridView
+    Friend WithEvents cmsForm As ContextMenuStrip
+    Friend WithEvents 年12月有馬記念サンプルToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents レース情報を取得ToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents 閉じるToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TopLink As Panel
+    Friend WithEvents ToolStripMenuItem1 As ToolStripSeparator
 End Class

@@ -5,7 +5,6 @@ Public Class ShowForm
     Public gsInputCount As Integer = 0
     Public gsInputText As List(Of String) = New List(Of String)
     Public gsBackandGoFlg As Integer = 0
-    Public gsDefaultURL As String = "https://race.netkeiba.com/?pid=race&id=c201806050811&mode=shutuba"
 
 #Region "プロパティ"
     '別クラスから値を取得・設定するためのフィールドとプロパティ
@@ -60,9 +59,9 @@ Public Class ShowForm
 
     'フォームロード（初期値設定）
     Private Sub Fromload(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Text = "netkeiba.comスクレイピング"
         JikkouMethodText = "初期画面"
         'Me.MinimumSize = New Size(700, 570)
-        Me.txtSyutubahyouURL.Text = gsDefaultURL  '初期値サンプル
         Me.txtSyutubahyouURL.SelectAll()
         Me.dgvSyutubahyou.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
         Me.dgvSyutubahyou.SelectionMode = DataGridViewSelectionMode.FullRowSelect
@@ -188,7 +187,7 @@ Public Class ShowForm
             If gsInputCount > 0 Then
                 gsBackandGoFlg = 1
                 If gsInputCount = 1 Then
-                    Me.txtSyutubahyouURL.Text = gsDefaultURL
+                    Me.txtSyutubahyouURL.Text = ""
                 Else
                     Dim selectlen = Me.txtSyutubahyouURL.SelectionStart
                     Dim beforelen = Me.txtSyutubahyouURL.Text.Length
@@ -264,5 +263,21 @@ Public Class ShowForm
         End If
     End Sub
 
+    Private Sub レース情報を取得ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles レース情報を取得ToolStripMenuItem.Click
+        Call btnGetSyutubahyou_Click(Me.btnGetSyutubahyou, e)
+    End Sub
 
+    Private Sub 閉じるToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 閉じるToolStripMenuItem.Click
+        Me.Close()
+    End Sub
+
+    Private Sub 年12月有馬記念サンプルToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 年12月有馬記念サンプルToolStripMenuItem.Click
+        Me.txtSyutubahyouURL.Text = "https://race.netkeiba.com/?pid=race&id=c201806050811&mode=shutuba"
+        Me.txtSyutubahyouURL.Refresh()
+        Call btnGetSyutubahyou_Click(Me.btnGetSyutubahyou, e)
+    End Sub
+
+    Private Sub Panel1_Click(sender As Object, e As EventArgs) Handles TopLink.Click
+        System.Diagnostics.Process.Start("http://www.netkeiba.com/?rf=logo")
+    End Sub
 End Class

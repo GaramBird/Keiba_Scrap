@@ -799,9 +799,9 @@ Public Class SyutubahyouScrap
         ShowForm.ShowFormInstance.SyutubahyouDataGridSet = dt
 #End Region
 
-        ShowForm.ShowFormInstance.JikkouMethodText = "「" & racename & "」情報を表示しています。（馬番が未発表です。発表後にもう一度取得してください。）" '実行中の処理を記載する。
+        ShowForm.ShowFormInstance.JikkouMethodText = "「" & racename & "」情報を表示しています。（馬番が取得出来ませんでした。馬番が発表された後に再取得してください。）" '実行中の処理を記載する。
         ShowForm.ShowFormInstance.JikkouBarValue = ShowForm.jikkouBar.Maximum    '実行ステータスバーを加算する。
-        MessageBox.Show("出馬表のスクレイピングが完了しました。")
+        MessageBox.Show("出馬表のスクレイピングが完了しました。" & vbCrLf & vbCrLf & "馬番が取得出来ませんでした。" & vbCrLf & "馬番が発表された後に再取得してください。", "注意")
 
 
         Return True
