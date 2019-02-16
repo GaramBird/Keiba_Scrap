@@ -75,7 +75,7 @@ Public Class GetDBRaceInfo
             ElseIf baba(baba.Count - 1).IndexOf("ダート") >= 0 Then
                 baba_status.Add(babainfo(2).Replace("&nbsp;", "").Substring((finddart + 2) + 6).Trim())
             Else
-                baba_status.Add("データ取得失敗")
+                baba_status.Add("取得失敗")
             End If
         Else
             '通常の馬場状況取得

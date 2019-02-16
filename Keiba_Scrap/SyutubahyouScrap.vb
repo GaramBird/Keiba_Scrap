@@ -432,6 +432,7 @@ Public Class SyutubahyouScrap
                         yon_racename(i), yon_nagasa(i), yon_kaisaibi(i), yon_basho(i), yon_baba(i), yon_baba_status(i), yon_wether(i), yon_juni(i), yon_time(i), yon_weight(i),
                         go_racename(i), go_nagasa(i), go_kaisaibi(i), go_basho(i), go_baba(i), go_baba_status(i), go_wether(i), go_juni(i), go_time(i), go_weight(i))
         Next
+
 #End Region
 
 

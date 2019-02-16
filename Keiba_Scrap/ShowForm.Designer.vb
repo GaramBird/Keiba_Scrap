@@ -42,6 +42,7 @@ Partial Class ShowForm
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
         Me.閉じるToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TopLink = New System.Windows.Forms.Panel()
+        Me.年2月共同通信杯サンプル7頭ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.dgvSyutubahyou, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvYosouRace, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.cmsForm.SuspendLayout()
@@ -71,10 +72,10 @@ Partial Class ShowForm
         '
         Me.jikkouBar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.jikkouBar.Location = New System.Drawing.Point(-3, 540)
+        Me.jikkouBar.Location = New System.Drawing.Point(0, 540)
         Me.jikkouBar.Maximum = 150
         Me.jikkouBar.Name = "jikkouBar"
-        Me.jikkouBar.Size = New System.Drawing.Size(886, 13)
+        Me.jikkouBar.Size = New System.Drawing.Size(882, 14)
         Me.jikkouBar.TabIndex = 3
         '
         'jikkoumethod
@@ -87,7 +88,7 @@ Partial Class ShowForm
         Me.jikkoumethod.Margin = New System.Windows.Forms.Padding(0)
         Me.jikkoumethod.Name = "jikkoumethod"
         Me.jikkoumethod.ReadOnly = True
-        Me.jikkoumethod.Size = New System.Drawing.Size(822, 19)
+        Me.jikkoumethod.Size = New System.Drawing.Size(811, 19)
         Me.jikkoumethod.TabIndex = 4
         Me.jikkoumethod.TabStop = False
         '
@@ -184,31 +185,31 @@ Partial Class ShowForm
         '
         'cmsForm
         '
-        Me.cmsForm.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.年12月有馬記念サンプルToolStripMenuItem, Me.レース情報を取得ToolStripMenuItem, Me.ToolStripMenuItem1, Me.閉じるToolStripMenuItem})
+        Me.cmsForm.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.年12月有馬記念サンプルToolStripMenuItem, Me.年2月共同通信杯サンプル7頭ToolStripMenuItem, Me.レース情報を取得ToolStripMenuItem, Me.ToolStripMenuItem1, Me.閉じるToolStripMenuItem})
         Me.cmsForm.Name = "cmsForm"
-        Me.cmsForm.Size = New System.Drawing.Size(263, 76)
+        Me.cmsForm.Size = New System.Drawing.Size(287, 120)
         '
         '年12月有馬記念サンプルToolStripMenuItem
         '
         Me.年12月有馬記念サンプルToolStripMenuItem.Name = "年12月有馬記念サンプルToolStripMenuItem"
-        Me.年12月有馬記念サンプルToolStripMenuItem.Size = New System.Drawing.Size(262, 22)
+        Me.年12月有馬記念サンプルToolStripMenuItem.Size = New System.Drawing.Size(286, 22)
         Me.年12月有馬記念サンプルToolStripMenuItem.Text = "2018年12月有馬記念（サンプル）"
         '
         'レース情報を取得ToolStripMenuItem
         '
         Me.レース情報を取得ToolStripMenuItem.Name = "レース情報を取得ToolStripMenuItem"
-        Me.レース情報を取得ToolStripMenuItem.Size = New System.Drawing.Size(262, 22)
+        Me.レース情報を取得ToolStripMenuItem.Size = New System.Drawing.Size(286, 22)
         Me.レース情報を取得ToolStripMenuItem.Text = "レース情報を取得"
         '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(259, 6)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(283, 6)
         '
         '閉じるToolStripMenuItem
         '
         Me.閉じるToolStripMenuItem.Name = "閉じるToolStripMenuItem"
-        Me.閉じるToolStripMenuItem.Size = New System.Drawing.Size(262, 22)
+        Me.閉じるToolStripMenuItem.Size = New System.Drawing.Size(286, 22)
         Me.閉じるToolStripMenuItem.Text = "閉じる"
         '
         'TopLink
@@ -219,6 +220,12 @@ Partial Class ShowForm
         Me.TopLink.Name = "TopLink"
         Me.TopLink.Size = New System.Drawing.Size(54, 44)
         Me.TopLink.TabIndex = 13
+        '
+        '年2月共同通信杯サンプル7頭ToolStripMenuItem
+        '
+        Me.年2月共同通信杯サンプル7頭ToolStripMenuItem.Name = "年2月共同通信杯サンプル7頭ToolStripMenuItem"
+        Me.年2月共同通信杯サンプル7頭ToolStripMenuItem.Size = New System.Drawing.Size(286, 22)
+        Me.年2月共同通信杯サンプル7頭ToolStripMenuItem.Text = "2018年2月共同通信杯（サンプル）7頭"
         '
         'ShowForm
         '
@@ -268,4 +275,5 @@ Partial Class ShowForm
     Friend WithEvents 閉じるToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents TopLink As Panel
     Friend WithEvents ToolStripMenuItem1 As ToolStripSeparator
+    Friend WithEvents 年2月共同通信杯サンプル7頭ToolStripMenuItem As ToolStripMenuItem
 End Class

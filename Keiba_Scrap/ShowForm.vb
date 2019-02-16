@@ -63,13 +63,6 @@ Public Class ShowForm
         JikkouMethodText = "初期画面"
         Me.MinimumSize = New Size(897, 593)
         Me.txtSyutubahyouURL.SelectAll()
-        Me.dgvSyutubahyou.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
-        Me.dgvSyutubahyou.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        Me.dgvSyutubahyou.AllowUserToAddRows = False
-        Me.dgvSyutubahyou.AlternatingRowsDefaultCellStyle.BackColor = Color.FromName("WhiteSmoke")  '奇数行を黄色にする
-        Me.dgvYosouRace.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
-        Me.dgvYosouRace.AllowUserToAddRows = False
-        Me.dgvSyutubahyou.DefaultCellStyle.NullValue = "なし"
     End Sub
 
     'ブラウザ表示ボタン
@@ -278,36 +271,125 @@ Public Class ShowForm
         Me.txtSyutubahyouURL.Refresh()
         Call btnGetSyutubahyou_Click(Me.btnGetSyutubahyou, e)
     End Sub
+    Private Sub 年2月共同通信杯サンプル7頭ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 年2月共同通信杯サンプル7頭ToolStripMenuItem.Click
+        Me.txtSyutubahyouURL.Text = "https://race.netkeiba.com/?pid=race&id=p201905010611&mode=shutuba"
+        Me.txtSyutubahyouURL.Refresh()
+        Call btnGetSyutubahyou_Click(Me.btnGetSyutubahyou, e)
+    End Sub
 
     Private Sub Panel1_Click(sender As Object, e As EventArgs) Handles TopLink.Click
         System.Diagnostics.Process.Start("http://www.netkeiba.com/?rf=logo")
     End Sub
 
-    Private Sub dgvSyutubahyou_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvSyutubahyou.CellContentClick
-
-    End Sub
 
     Private Sub dgvSyutubahyou_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles dgvSyutubahyou.CellFormatting
+        'グリッドビューの値が0の時(Integer)
         If TypeOf e.Value Is Integer Then
             Dim val As Integer = CInt(e.Value)
-            'セルの値により、背景色を変更する
             If val <= 0 Then
                 e.Value = "なし"
             End If
         End If
+        'グリッドビューの値が0の時(DateTime)
         If TypeOf e.Value Is DateTime Then
             Dim val As DateTime = CObj(e.Value)
-            'セルの値により、背景色を変更する
             If val = Nothing Then
                 e.Value = "なし"
             End If
         End If
+        'グリッドビューの値が0の時(TimeSpan)
         If TypeOf e.Value Is TimeSpan Then
             Dim val As TimeSpan = CObj(e.Value)
-            'セルの値により、背景色を変更する
             If val = Nothing Then
                 e.Value = "なし"
             End If
         End If
     End Sub
+
+    Private Sub dgvSyutubahyou_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvSyutubahyou.ColumnHeaderMouseClick
+        Dim clickedColumn As DataGridViewColumn = Me.dgvSyutubahyou.Columns(e.ColumnIndex)
+        If clickedColumn.SortMode <> DataGridViewColumnSortMode.Automatic Then
+            'ソート前に選択している馬名を取得する。
+            '選択されている行を表示
+            Dim sentakurow As List(Of String) = New List(Of String)
+            For Each r As DataGridViewRow In Me.dgvSyutubahyou.SelectedRows
+                sentakurow.Add(r.Cells("馬名").Value)
+            Next r
+
+            'ソート実行
+            Me.dgvSyutubahyou.CurrentCell = Nothing
+            Me.SortRows(clickedColumn, True)
+            Me.dgvSyutubahyou.Refresh()
+
+            'ソート後に選択していた馬名から選択する。
+            For Each r In sentakurow
+                For Each r2 As DataGridViewRow In Me.dgvSyutubahyou.Rows
+                    If r = r2.Cells("馬名").Value Then
+                        r2.Cells("馬名").Selected = True
+                    End If
+                Next
+            Next
+
+        End If
+    End Sub
+
+
+    Private Sub SortRows(ByVal sortColumn As DataGridViewColumn,
+        ByVal orderToggle As Boolean)
+        If sortColumn Is Nothing Then
+            Return
+        End If
+
+
+        '今までの並び替えグリフを消す
+        If sortColumn.SortMode = DataGridViewColumnSortMode.Programmatic AndAlso
+            Not (Me.dgvSyutubahyou.SortedColumn Is Nothing) AndAlso
+            Not Me.dgvSyutubahyou.SortedColumn.Equals(sortColumn) Then
+            Me.dgvSyutubahyou.SortedColumn.HeaderCell.SortGlyphDirection =
+                SortOrder.None
+        End If
+
+        '並び替えの方向（昇順か降順か）を決める
+        Dim sortDirection As System.ComponentModel.ListSortDirection
+        If orderToggle Then
+            sortDirection = IIf(Me.dgvSyutubahyou.SortOrder = SortOrder.Descending,
+                System.ComponentModel.ListSortDirection.Ascending,
+                System.ComponentModel.ListSortDirection.Descending)
+        Else
+            sortDirection = IIf(Me.dgvSyutubahyou.SortOrder = SortOrder.Descending,
+                System.ComponentModel.ListSortDirection.Descending,
+                System.ComponentModel.ListSortDirection.Ascending)
+        End If
+        Dim sOrder As SortOrder =
+            IIf(sortDirection = System.ComponentModel.ListSortDirection.Ascending,
+                SortOrder.Ascending, SortOrder.Descending)
+
+        '並び替えを行う
+        Me.dgvSyutubahyou.Sort(sortColumn, sortDirection)
+
+        If sortColumn.SortMode = DataGridViewColumnSortMode.Programmatic Then
+            '並び替えグリフを変更
+            sortColumn.HeaderCell.SortGlyphDirection = sOrder
+        End If
+    End Sub
+
+    Private Sub dgvSyutubahyou_Paint(sender As Object, e As PaintEventArgs) Handles dgvSyutubahyou.Paint
+        'プログラムでしか並び替えられないようにする
+        Dim dgvsyutubahyou_col As DataGridViewColumn
+        For Each dgvsyutubahyou_col In dgvSyutubahyou.Columns
+            dgvsyutubahyou_col.SortMode = DataGridViewColumnSortMode.Programmatic
+        Next dgvsyutubahyou_col
+
+        Me.dgvSyutubahyou.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+        Me.dgvSyutubahyou.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+        Me.dgvSyutubahyou.AllowUserToAddRows = False
+        Me.dgvSyutubahyou.AlternatingRowsDefaultCellStyle.BackColor = Color.FromName("WhiteSmoke")  '奇数行を黄色にする
+        Me.dgvSyutubahyou.DefaultCellStyle.NullValue = "なし"
+    End Sub
+
+    Private Sub dgvYosouRace_Paint(sender As Object, e As PaintEventArgs) Handles dgvYosouRace.Paint
+        Me.dgvYosouRace.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+        Me.dgvYosouRace.AllowUserToAddRows = False
+    End Sub
+
 End Class
