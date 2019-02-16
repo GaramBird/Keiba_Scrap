@@ -178,7 +178,7 @@ Partial Class ShowForm
         Me.dgvYosouRace.Name = "dgvYosouRace"
         Me.dgvYosouRace.ReadOnly = True
         Me.dgvYosouRace.RowTemplate.Height = 21
-        Me.dgvYosouRace.Size = New System.Drawing.Size(877, 40)
+        Me.dgvYosouRace.Size = New System.Drawing.Size(877, 38)
         Me.dgvYosouRace.TabIndex = 12
         Me.dgvYosouRace.TabStop = False
         '

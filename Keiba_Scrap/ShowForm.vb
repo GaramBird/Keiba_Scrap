@@ -61,7 +61,7 @@ Public Class ShowForm
     Private Sub Fromload(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Text = "netkeiba.comスクレイピング"
         JikkouMethodText = "初期画面"
-        'Me.MinimumSize = New Size(700, 570)
+        Me.MinimumSize = New Size(897, 593)
         Me.txtSyutubahyouURL.SelectAll()
         Me.dgvSyutubahyou.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
         Me.dgvSyutubahyou.SelectionMode = DataGridViewSelectionMode.FullRowSelect
