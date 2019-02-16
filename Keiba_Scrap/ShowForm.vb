@@ -66,8 +66,10 @@ Public Class ShowForm
         Me.dgvSyutubahyou.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
         Me.dgvSyutubahyou.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         Me.dgvSyutubahyou.AllowUserToAddRows = False
+        Me.dgvSyutubahyou.AlternatingRowsDefaultCellStyle.BackColor = Color.FromName("WhiteSmoke")  '奇数行を黄色にする
         Me.dgvYosouRace.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
         Me.dgvYosouRace.AllowUserToAddRows = False
+        Me.dgvSyutubahyou.DefaultCellStyle.NullValue = "なし"
     End Sub
 
     'ブラウザ表示ボタン
@@ -279,5 +281,33 @@ Public Class ShowForm
 
     Private Sub Panel1_Click(sender As Object, e As EventArgs) Handles TopLink.Click
         System.Diagnostics.Process.Start("http://www.netkeiba.com/?rf=logo")
+    End Sub
+
+    Private Sub dgvSyutubahyou_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvSyutubahyou.CellContentClick
+
+    End Sub
+
+    Private Sub dgvSyutubahyou_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles dgvSyutubahyou.CellFormatting
+        If TypeOf e.Value Is Integer Then
+            Dim val As Integer = CInt(e.Value)
+            'セルの値により、背景色を変更する
+            If val <= 0 Then
+                e.Value = "なし"
+            End If
+        End If
+        If TypeOf e.Value Is DateTime Then
+            Dim val As DateTime = CObj(e.Value)
+            'セルの値により、背景色を変更する
+            If val = Nothing Then
+                e.Value = "なし"
+            End If
+        End If
+        If TypeOf e.Value Is TimeSpan Then
+            Dim val As TimeSpan = CObj(e.Value)
+            'セルの値により、背景色を変更する
+            If val = Nothing Then
+                e.Value = "なし"
+            End If
+        End If
     End Sub
 End Class

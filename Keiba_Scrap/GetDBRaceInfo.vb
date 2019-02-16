@@ -60,7 +60,11 @@ Public Class GetDBRaceInfo
                 End Select
         End Select
         nagasa.Add(reg_int.Replace(babainfo(0).Substring(0, babainfo(0).IndexOf("m")), ""))
-        wether.Add(babainfo(1).Substring(babainfo(1).IndexOf(":") + 1).Trim())
+        If babainfo(1).Substring(babainfo(1).IndexOf(":") + 1).Trim() <> "" Then
+            wether.Add(babainfo(1).Substring(babainfo(1).IndexOf(":") + 1).Trim())
+        Else
+            wether.Add(Nothing)
+        End If
 
         '何だこの条件...（何故か両方の馬場状況が記載されている場合）
         If babainfo(2).IndexOf("芝") >= 0 AndAlso babainfo(2).IndexOf("ダート") >= 0 Then
@@ -71,7 +75,7 @@ Public Class GetDBRaceInfo
             ElseIf baba(baba.Count - 1).IndexOf("ダート") >= 0 Then
                 baba_status.Add(babainfo(2).Replace("&nbsp;", "").Substring((finddart + 2) + 6).Trim())
             Else
-                baba_status.Add("")
+                baba_status.Add("データ取得失敗")
             End If
         Else
             '通常の馬場状況取得
