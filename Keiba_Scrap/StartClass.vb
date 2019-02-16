@@ -1,6 +1,6 @@
 ﻿Public Class StartClass
     Shared Sub Main()
-        'Mutex名を決める（必ずアプリケーション固有の文字列に変更すること！）
+        'Mutex名を決める
         Dim mutexName As String = "netkeiba.comスクレイピング"
         'Mutexオブジェクトを作成する
         Dim mutex As New System.Threading.Mutex(False, mutexName)
