@@ -96,7 +96,7 @@ Public Class ShowForm
     Private Sub btnGetSyutubahyou_Click(sender As Object, e As EventArgs) Handles btnGetSyutubahyou.Click
 
         If txtSyutubahyouURL.Text <> "" Then
-            If txtSyutubahyouURL.Text.IndexOf("race.netkeiba.com") >= 0 And txtSyutubahyouURL.Text.Substring(txtSyutubahyouURL.Text.Length - 12) = "mode=shutuba" Then
+            If txtSyutubahyouURL.Text.IndexOf("race.netkeiba.com") >= 0 Then
                 Me.btnGetSyutubahyou.Enabled = False
                 Me.btnCancel.Enabled = True
                 Me.btnCSVGridView.Enabled = False

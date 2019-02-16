@@ -247,15 +247,15 @@ Public Class SyutubahyouScrap
 
                 Select Case Split(row.SelectNodes("//td[" & 4 + colyosousiCount & "]/img").Item(sansho_umaban).OuterHtml, "horse_race_type")(1).Substring(0, 2)
                     Case "00"   '逃げ
-                        h_reg_type.Add("データなし")
+                        h_reg_type.Add("0:データなし")
                     Case "01"   '逃げ
-                        h_reg_type.Add("逃げ")
+                        h_reg_type.Add("1:逃げ")
                     Case "02"   '先行
-                        h_reg_type.Add("先行")
+                        h_reg_type.Add("2:先行")
                     Case "03"   '差し
-                        h_reg_type.Add("差し")
+                        h_reg_type.Add("3:差し")
                     Case "04"   '追込
-                        h_reg_type.Add("追込")
+                        h_reg_type.Add("4:追込")
                 End Select
 
                 '体重を取得（情報がNothingを追加）
@@ -608,15 +608,15 @@ Public Class SyutubahyouScrap
 
                 Select Case Split(row.SelectNodes("//td[" & 2 + colyosousiCount & "]/img").Item(sansho_umaban).OuterHtml, "horse_race_type")(1).Substring(0, 2)
                     Case "00"   '逃げ
-                        h_reg_type.Add("データなし")
+                        h_reg_type.Add("0:データなし")
                     Case "01"   '逃げ
-                        h_reg_type.Add("逃げ")
+                        h_reg_type.Add("1:逃げ")
                     Case "02"   '先行
-                        h_reg_type.Add("先行")
+                        h_reg_type.Add("2:先行")
                     Case "03"   '差し
-                        h_reg_type.Add("差し")
+                        h_reg_type.Add("3:差し")
                     Case "04"   '追込
-                        h_reg_type.Add("追込")
+                        h_reg_type.Add("4:追込")
                 End Select
 
                 '体重を取得（情報がNothingを追加）

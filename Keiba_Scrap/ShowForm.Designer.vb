@@ -174,7 +174,7 @@ Partial Class ShowForm
         Me.dgvYosouRace.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvYosouRace.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvYosouRace.Location = New System.Drawing.Point(4, 53)
+        Me.dgvYosouRace.Location = New System.Drawing.Point(2, 53)
         Me.dgvYosouRace.Name = "dgvYosouRace"
         Me.dgvYosouRace.ReadOnly = True
         Me.dgvYosouRace.RowTemplate.Height = 21
