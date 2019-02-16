@@ -311,6 +311,7 @@ Public Class ShowForm
         If clickedColumn.SortMode <> DataGridViewColumnSortMode.Automatic Then
             'ソート前に選択している馬名を取得する。
             '選択されている行を表示
+            Dim sentakuindex As Integer = -1
             Dim sentakurow As List(Of String) = New List(Of String)
             For Each r As DataGridViewRow In Me.dgvSyutubahyou.SelectedRows
                 sentakurow.Add(r.Cells("馬名").Value)
@@ -321,11 +322,25 @@ Public Class ShowForm
             Me.SortRows(clickedColumn, True)
             Me.dgvSyutubahyou.Refresh()
 
-            'ソート後に選択していた馬名から選択する。
+            '合致する行から最後のインデックスを取得するための前処理
             For Each r In sentakurow
                 For Each r2 As DataGridViewRow In Me.dgvSyutubahyou.Rows
                     If r = r2.Cells("馬名").Value Then
                         r2.Cells("馬名").Selected = True
+                        sentakuindex = r2.Index
+                    End If
+                Next
+            Next
+            '最後に選択したセルをカレントする。
+            If sentakuindex >= 0 Then
+                Me.dgvSyutubahyou.CurrentCell = Me.dgvSyutubahyou.Rows.Item(sentakuindex).Cells("馬名")
+            End If
+            '合致する行を選択するための後処理
+            For Each r In sentakurow
+                For Each r2 As DataGridViewRow In Me.dgvSyutubahyou.Rows
+                    If r = r2.Cells("馬名").Value Then
+                        r2.Cells("馬名").Selected = True
+                        sentakuindex = r2.Index
                     End If
                 Next
             Next
@@ -381,6 +396,7 @@ Public Class ShowForm
         Next dgvsyutubahyou_col
 
         Me.dgvSyutubahyou.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+        Me.dgvSyutubahyou.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
         Me.dgvSyutubahyou.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         Me.dgvSyutubahyou.AllowUserToAddRows = False
         Me.dgvSyutubahyou.AlternatingRowsDefaultCellStyle.BackColor = Color.FromName("WhiteSmoke")  '奇数行を黄色にする
@@ -389,6 +405,7 @@ Public Class ShowForm
 
     Private Sub dgvYosouRace_Paint(sender As Object, e As PaintEventArgs) Handles dgvYosouRace.Paint
         Me.dgvYosouRace.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+        Me.dgvYosouRace.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
         Me.dgvYosouRace.AllowUserToAddRows = False
     End Sub
 
