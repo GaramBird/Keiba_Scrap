@@ -24,6 +24,7 @@ Public Class ShowForm
         End Get
         Set(ByVal Value As Integer)
             jikkouBar.Value = Value
+            jikkouBar.Refresh()
         End Set
     End Property
     Public Property JikkouMethodText() As String
@@ -32,6 +33,7 @@ Public Class ShowForm
         End Get
         Set(ByVal Value As String)
             jikkoumethod.Text = Value
+            jikkoumethod.Refresh()
         End Set
     End Property
 
@@ -41,6 +43,7 @@ Public Class ShowForm
         End Get
         Set(ByVal Value As DataTable)
             dgvSyutubahyou.DataSource = Value
+            dgvSyutubahyou.Refresh()
         End Set
     End Property
 
@@ -50,6 +53,7 @@ Public Class ShowForm
         End Get
         Set(ByVal Value As DataTable)
             dgvYosouRace.DataSource = Value
+            dgvYosouRace.Refresh()
         End Set
     End Property
 
@@ -161,9 +165,6 @@ Public Class ShowForm
     End Sub
 
 
-    Private Sub jikkoumethod_TextChanged(sender As Object, e As EventArgs) Handles jikkoumethod.TextChanged
-        Me.jikkoumethod.Refresh()
-    End Sub
 
     'テキストボックス内で特定キーが押された場合
     Private Sub txtSyutubahyouURL_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSyutubahyouURL.KeyDown
@@ -401,6 +402,14 @@ Public Class ShowForm
         Me.dgvSyutubahyou.AllowUserToAddRows = False
         Me.dgvSyutubahyou.AlternatingRowsDefaultCellStyle.BackColor = Color.FromName("WhiteSmoke")  '奇数行を黄色にする
         Me.dgvSyutubahyou.DefaultCellStyle.NullValue = "なし"
+        If Me.dgvSyutubahyou.DisplayedRowCount(False) > 0 Then
+            If Me.dgvSyutubahyou.Columns(0).HeaderCell.Value = "馬番" Then
+                Me.dgvSyutubahyou.Columns(3).Frozen = True
+            ElseIf Me.dgvSyutubahyou.Columns(0).HeaderCell.Value = "馬名" Then
+                Me.dgvSyutubahyou.Columns(2).Frozen = True
+            End If
+        End If
+
     End Sub
 
     Private Sub dgvYosouRace_Paint(sender As Object, e As PaintEventArgs) Handles dgvYosouRace.Paint

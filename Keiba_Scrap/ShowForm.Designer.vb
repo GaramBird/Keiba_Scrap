@@ -38,11 +38,11 @@ Partial Class ShowForm
         Me.dgvYosouRace = New System.Windows.Forms.DataGridView()
         Me.cmsForm = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.年12月有馬記念サンプルToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.年2月共同通信杯サンプル7頭ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.レース情報を取得ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
         Me.閉じるToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TopLink = New System.Windows.Forms.Panel()
-        Me.年2月共同通信杯サンプル7頭ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.dgvSyutubahyou, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvYosouRace, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.cmsForm.SuspendLayout()
@@ -179,7 +179,7 @@ Partial Class ShowForm
         Me.dgvYosouRace.Name = "dgvYosouRace"
         Me.dgvYosouRace.ReadOnly = True
         Me.dgvYosouRace.RowTemplate.Height = 21
-        Me.dgvYosouRace.Size = New System.Drawing.Size(877, 38)
+        Me.dgvYosouRace.Size = New System.Drawing.Size(877, 40)
         Me.dgvYosouRace.TabIndex = 12
         Me.dgvYosouRace.TabStop = False
         '
@@ -187,13 +187,19 @@ Partial Class ShowForm
         '
         Me.cmsForm.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.年12月有馬記念サンプルToolStripMenuItem, Me.年2月共同通信杯サンプル7頭ToolStripMenuItem, Me.レース情報を取得ToolStripMenuItem, Me.ToolStripMenuItem1, Me.閉じるToolStripMenuItem})
         Me.cmsForm.Name = "cmsForm"
-        Me.cmsForm.Size = New System.Drawing.Size(287, 120)
+        Me.cmsForm.Size = New System.Drawing.Size(287, 98)
         '
         '年12月有馬記念サンプルToolStripMenuItem
         '
         Me.年12月有馬記念サンプルToolStripMenuItem.Name = "年12月有馬記念サンプルToolStripMenuItem"
         Me.年12月有馬記念サンプルToolStripMenuItem.Size = New System.Drawing.Size(286, 22)
         Me.年12月有馬記念サンプルToolStripMenuItem.Text = "2018年12月有馬記念（サンプル）"
+        '
+        '年2月共同通信杯サンプル7頭ToolStripMenuItem
+        '
+        Me.年2月共同通信杯サンプル7頭ToolStripMenuItem.Name = "年2月共同通信杯サンプル7頭ToolStripMenuItem"
+        Me.年2月共同通信杯サンプル7頭ToolStripMenuItem.Size = New System.Drawing.Size(286, 22)
+        Me.年2月共同通信杯サンプル7頭ToolStripMenuItem.Text = "2018年2月共同通信杯（サンプル）7頭"
         '
         'レース情報を取得ToolStripMenuItem
         '
@@ -220,12 +226,6 @@ Partial Class ShowForm
         Me.TopLink.Name = "TopLink"
         Me.TopLink.Size = New System.Drawing.Size(54, 44)
         Me.TopLink.TabIndex = 13
-        '
-        '年2月共同通信杯サンプル7頭ToolStripMenuItem
-        '
-        Me.年2月共同通信杯サンプル7頭ToolStripMenuItem.Name = "年2月共同通信杯サンプル7頭ToolStripMenuItem"
-        Me.年2月共同通信杯サンプル7頭ToolStripMenuItem.Size = New System.Drawing.Size(286, 22)
-        Me.年2月共同通信杯サンプル7頭ToolStripMenuItem.Text = "2018年2月共同通信杯（サンプル）7頭"
         '
         'ShowForm
         '

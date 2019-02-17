@@ -183,7 +183,6 @@ Public Class SyutubahyouScrap
 
 #Region "グリッドビュー設定"
         ShowForm.ShowFormInstance.YosouRaceDataGridSet = dtRace
-        ShowForm.dgvYosouRace.Refresh()
 #End Region
 
 
@@ -362,17 +361,17 @@ Public Class SyutubahyouScrap
 
         dt.Columns.Add("馬番", GetType(Integer))
         dt.Columns.Add("馬名", GetType(String))
-        dt.Columns.Add("父", GetType(String))
-        dt.Columns.Add("母", GetType(String))
+        dt.Columns.Add("オッズ", GetType(Double))
+        dt.Columns.Add("人気", GetType(Integer))
+        dt.Columns.Add("斤量", GetType(String))
+        dt.Columns.Add("騎手", GetType(String))
         dt.Columns.Add("脚質", GetType(String))
         dt.Columns.Add("体重", GetType(String))
         dt.Columns.Add("性", GetType(String))
         dt.Columns.Add("歳", GetType(Integer))
         dt.Columns.Add("毛色", GetType(String))
-        dt.Columns.Add("斤量", GetType(String))
-        dt.Columns.Add("騎手", GetType(String))
-        dt.Columns.Add("オッズ", GetType(Double))
-        dt.Columns.Add("人気", GetType(Integer))
+        dt.Columns.Add("父", GetType(String))
+        dt.Columns.Add("母", GetType(String))
         dt.Columns.Add("1走前レース名", GetType(String))
         dt.Columns.Add("1走前長さ", GetType(Integer))
         dt.Columns.Add("1走前開催日", GetType(DateTime))
@@ -425,7 +424,7 @@ Public Class SyutubahyouScrap
         dt.Columns.Add("5走前体重", GetType(Integer))
 
         For i = 0 To h_umaban.Count - 1
-            dt.Rows.Add(h_umaban(i), h_name(i), h_smaller_father(i), h_smaller_mother(i), h_reg_type(i), h_weight(i), h_sex(i), h_age(i), h_keiro(i), h_kinryou(i), h_kisyu(i), h_oz(i), h_ninki(i),
+            dt.Rows.Add(h_umaban(i), h_name(i), h_oz(i), h_ninki(i), h_kinryou(i), h_kisyu(i), h_reg_type(i), h_weight(i), h_sex(i), h_age(i), h_keiro(i), h_smaller_father(i), h_smaller_mother(i),
                         iti_racename(i), iti_nagasa(i), iti_kaisaibi(i), iti_basho(i), iti_baba(i), iti_baba_status(i), iti_wether(i), iti_juni(i), iti_time(i), iti_weight(i),
                         ni_racename(i), ni_nagasa(i), ni_kaisaibi(i), ni_basho(i), ni_baba(i), ni_baba_status(i), ni_wether(i), ni_juni(i), ni_time(i), ni_weight(i),
                         san_racename(i), san_nagasa(i), san_kaisaibi(i), san_basho(i), san_baba(i), san_baba_status(i), san_wether(i), san_juni(i), san_time(i), san_weight(i),
@@ -723,17 +722,17 @@ Public Class SyutubahyouScrap
         Dim dt = New DataTable("出馬表データテーブル")
 
         dt.Columns.Add("馬名", GetType(String))
-        dt.Columns.Add("父", GetType(String))
-        dt.Columns.Add("母", GetType(String))
+        dt.Columns.Add("オッズ", GetType(Double))
+        dt.Columns.Add("人気", GetType(Integer))
+        dt.Columns.Add("斤量", GetType(String))
+        dt.Columns.Add("騎手", GetType(String))
         dt.Columns.Add("脚質", GetType(String))
         dt.Columns.Add("体重", GetType(String))
         dt.Columns.Add("性", GetType(String))
         dt.Columns.Add("歳", GetType(Integer))
         dt.Columns.Add("毛色", GetType(String))
-        dt.Columns.Add("斤量", GetType(String))
-        dt.Columns.Add("騎手", GetType(String))
-        dt.Columns.Add("オッズ", GetType(Double))
-        dt.Columns.Add("人気", GetType(Integer))
+        dt.Columns.Add("父", GetType(String))
+        dt.Columns.Add("母", GetType(String))
         dt.Columns.Add("1走前レース名", GetType(String))
         dt.Columns.Add("1走前長さ", GetType(Integer))
         dt.Columns.Add("1走前開催日", GetType(DateTime))
@@ -786,7 +785,7 @@ Public Class SyutubahyouScrap
         dt.Columns.Add("5走前体重", GetType(Integer))
 
         For i = 0 To number.Count - 1
-            dt.Rows.Add(h_name(i), h_smaller_father(i), h_smaller_mother(i), h_reg_type(i), h_weight(i), h_sex(i), h_age(i), h_keiro(i), h_kinryou(i), h_kisyu(i), h_oz(i), h_ninki(i),
+            dt.Rows.Add(h_name(i), h_oz(i), h_ninki(i), h_kinryou(i), h_kisyu(i), h_reg_type(i), h_weight(i), h_sex(i), h_age(i), h_keiro(i), h_smaller_father(i), h_smaller_mother(i),
                         iti_racename(i), iti_nagasa(i), iti_kaisaibi(i), iti_basho(i), iti_baba(i), iti_baba_status(i), iti_wether(i), iti_juni(i), iti_time(i), iti_weight(i),
                         ni_racename(i), ni_nagasa(i), ni_kaisaibi(i), ni_basho(i), ni_baba(i), ni_baba_status(i), ni_wether(i), ni_juni(i), ni_time(i), ni_weight(i),
                         san_racename(i), san_nagasa(i), san_kaisaibi(i), san_basho(i), san_baba(i), san_baba_status(i), san_wether(i), san_juni(i), san_time(i), san_weight(i),
@@ -798,6 +797,7 @@ Public Class SyutubahyouScrap
 
 #Region "グリッドビュー設定"
         ShowForm.ShowFormInstance.SyutubahyouDataGridSet = dt
+        ShowForm.dgvSyutubahyou.Columns(2).Frozen = True
 #End Region
 
         ShowForm.ShowFormInstance.JikkouMethodText = "「" & racename & "」情報を表示しています。（馬番が取得出来ませんでした。馬番が発表された後に再取得してください。）" '実行中の処理を記載する。
