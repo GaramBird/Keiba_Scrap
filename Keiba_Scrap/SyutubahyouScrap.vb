@@ -2,6 +2,8 @@
 Imports System.Text.RegularExpressions
 
 Public Class SyutubahyouScrap
+
+#Region "馬版付き出馬表（5柱）の取得"
     Public Function Scraping(syutubahyouurl) As Boolean
         '正規表現
         Dim reg_int As New Regex("[^0-9]")  '数字のみを抽出に使用
@@ -149,7 +151,7 @@ Public Class SyutubahyouScrap
         End Select
 
         Dim racenagasa As Integer = reg_int.Replace(racebabainfo.Substring(1), "")
-            Dim racemawari = racebabainfo.Substring(racebabainfo.IndexOf("(") + 1, 1) & "回り"
+        Dim racemawari = racebabainfo.Substring(racebabainfo.IndexOf("(") + 1, 1) & "回り"
         Dim racewetherinfo() = Split(syutubahyou_objDOC.DocumentNode.SelectNodes("//div[@class=""data_intro""]/dl/dd/p").Item(1).InnerText, "：")
         Dim racewether As String = "未発表"
         Dim racebabastutas = "未発表"
@@ -355,7 +357,7 @@ Public Class SyutubahyouScrap
         Next
 
 
-#Region "スクレイピングデータテーブル"
+#Region "スクレイピングデータテーブル定義"
         '取得したスクレイピングデータをデータグリッドビューのデータソースへとセットする。
         Dim dt = New DataTable("出馬表データテーブル")
 
@@ -446,8 +448,9 @@ Public Class SyutubahyouScrap
 
         Return True
     End Function
+#End Region
 
-
+#Region "馬版なし出馬表（5柱）の取得"
     Public Function Scraping_Numberless(ByVal racename As String, ByVal syutubahyouurl As String) As Boolean
         '正規表現
         Dim reg_int As New Regex("[^0-9]")  '数字のみを抽出に使用
@@ -717,7 +720,7 @@ Public Class SyutubahyouScrap
         Next
 
 
-#Region "スクレイピングデータテーブル"
+#Region "スクレイピングデータテーブル定義"
         '取得したスクレイピングデータをデータグリッドビューのデータソースへとセットする。
         Dim dt = New DataTable("出馬表データテーブル")
 
@@ -807,6 +810,6 @@ Public Class SyutubahyouScrap
 
         Return True
     End Function
-
+#End Region
 
 End Class

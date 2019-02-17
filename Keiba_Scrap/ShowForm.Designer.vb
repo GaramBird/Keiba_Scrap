@@ -167,7 +167,7 @@ Partial Class ShowForm
         Me.btnAiLogic.Size = New System.Drawing.Size(127, 23)
         Me.btnAiLogic.TabIndex = 11
         Me.btnAiLogic.TabStop = False
-        Me.btnAiLogic.Text = "期待値算出（AI）"
+        Me.btnAiLogic.Text = "期待値算出（未実装）"
         Me.btnAiLogic.UseVisualStyleBackColor = True
         '
         'dgvYosouRace
