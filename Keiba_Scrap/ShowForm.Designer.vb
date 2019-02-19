@@ -136,7 +136,7 @@ Partial Class ShowForm
         Me.btnCSVGridView.Size = New System.Drawing.Size(127, 23)
         Me.btnCSVGridView.TabIndex = 9
         Me.btnCSVGridView.TabStop = False
-        Me.btnCSVGridView.Text = "CSV出力（未実装）"
+        Me.btnCSVGridView.Text = "CSV出力"
         Me.btnCSVGridView.UseVisualStyleBackColor = True
         '
         'btnCancel
@@ -248,7 +248,7 @@ Partial Class ShowForm
         Me.Controls.Add(Me.btnGetSyutubahyou)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "ShowForm"
-        Me.Text = "Form1"
+        Me.Text = "netkeiba.comスクレイピング"
         CType(Me.dgvSyutubahyou, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvYosouRace, System.ComponentModel.ISupportInitialize).EndInit()
         Me.cmsForm.ResumeLayout(False)

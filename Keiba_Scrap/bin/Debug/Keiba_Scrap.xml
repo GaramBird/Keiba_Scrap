@@ -22,5 +22,12 @@ Keiba_Scrap
   現在のスレッドの CurrentUICulture プロパティをオーバーライドします。
 </summary>
 </member>
+<member name="M:Keiba_Scrap.ShowForm.DebugExportCsv(System.Data.DataTable,System.String)">
+ ＜summary＞
+ DataTableデバッグ用CSV出力
+ ＜/summary＞
+ ＜param name="pDt"＞出力対象データテーブル＜/param＞
+ ＜remarks＞＜/remarks＞
+</member>
 </members>
 </doc>

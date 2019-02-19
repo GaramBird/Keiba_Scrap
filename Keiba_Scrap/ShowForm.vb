@@ -62,8 +62,7 @@ Public Class ShowForm
 
 
     'フォームロード（初期値設定）
-    Private Sub Fromload(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Text = "netkeiba.comスクレイピング"
+    Private Sub Formload(sender As Object, e As EventArgs) Handles MyBase.Load
         JikkouMethodText = "初期画面"
         Me.MinimumSize = New Size(897, 593)
         Me.txtSyutubahyouURL.SelectAll()
@@ -81,15 +80,105 @@ Public Class ShowForm
 
     'CSV出力ボタン
     Private Sub btnCSVGridView_Click(sender As Object, e As EventArgs) Handles btnCSVGridView.Click
-        'If MessageBox.Show("表示しているグリッドビューをCSV出力しますか？（未実装、処理なし）", "確認", MessageBoxButtons.YesNo) = DialogResult.Yes Then
-        'End If
+        If MessageBox.Show("表示しているグリッドビューをCSV出力しますか？", "確認", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+            DebugExportCsv(ShowForm.ShowFormInstance.SyutubahyouDataGridSet, ShowForm.ShowFormInstance.YosouRaceDataGridSet.Rows(0).Item("レース名").ToString)
+        End If
         Me.txtSyutubahyouURL.Focus()
+    End Sub
+
+    ''' ＜summary＞
+    ''' DataTableデバッグ用CSV出力
+    ''' ＜/summary＞
+    ''' ＜param name="pDt"＞出力対象データテーブル＜/param＞
+    ''' ＜remarks＞＜/remarks＞
+    Private Sub DebugExportCsv(ByVal pDt As DataTable, ByVal pFileName As String)
+        'CSVで保存するDataTable
+        Dim dt As DataTable = pDt
+        '保存先のCSVファイルのパス
+        Dim datehyouji As String
+        datehyouji = DateTime.Now.ToString("HHmmss")
+        Dim csvPath As String = System.Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) & "\" & pFileName & datehyouji & ".csv"
+        'CSVファイルに書き込むときに使うEncoding
+        Dim enc As Text.Encoding = System.Text.Encoding.GetEncoding("Shift_JIS")
+
+        '開く
+        Dim sr As New IO.StreamWriter(csvPath, False, enc)
+
+        Dim colCount As Integer = dt.Columns.Count
+        Dim lastColIndex As Integer = colCount - 1
+
+        'ヘッダを書き込む
+        Dim i As Integer
+        For i = 0 To colCount - 1
+            'ヘッダの取得
+            Dim field As String = dt.Columns(i).Caption
+            '"で囲む必要があるか調べる
+            If field.IndexOf(ControlChars.Quote) > -1 OrElse
+            field.IndexOf(","c) > -1 OrElse
+            field.IndexOf(ControlChars.Cr) > -1 OrElse
+            field.IndexOf(ControlChars.Lf) > -1 OrElse
+            field.StartsWith(" ") OrElse
+            field.StartsWith(ControlChars.Tab) OrElse
+            field.EndsWith(" ") OrElse
+            field.EndsWith(ControlChars.Tab) Then
+                If field.IndexOf(ControlChars.Quote) > -1 Then
+                    '"を""とする
+                    field = field.Replace("""", """""")
+                End If
+                field = """" + field + """"
+            End If
+            'フィールドを書き込む
+            sr.Write(field)
+            'カンマを書き込む
+            If lastColIndex > i Then
+                sr.Write(","c)
+            End If
+        Next i
+        '改行する
+        sr.Write(ControlChars.Cr + ControlChars.Lf)
+
+        'レコードを書き込む
+        Dim row As DataRow
+        For Each row In dt.Rows
+            For i = 0 To colCount - 1
+                'フィールドの取得
+                Dim field As String = row(i).ToString()
+                '"で囲む必要があるか調べる
+                If field.IndexOf(ControlChars.Quote) > -1 OrElse
+                field.IndexOf(","c) > -1 OrElse
+                field.IndexOf(ControlChars.Cr) > -1 OrElse
+                field.IndexOf(ControlChars.Lf) > -1 OrElse
+                field.StartsWith(" ") OrElse
+                field.StartsWith(ControlChars.Tab) OrElse
+                field.EndsWith(" ") OrElse
+                field.EndsWith(ControlChars.Tab) Then
+                    If field.IndexOf(ControlChars.Quote) > -1 Then
+                        '"を""とする
+                        field = field.Replace("""", """""")
+                    End If
+                    field = """" + field + """"
+                End If
+                'フィールドを書き込む
+                sr.Write(field)
+                'カンマを書き込む
+                If lastColIndex > i Then
+                    sr.Write(","c)
+                End If
+            Next i
+            '改行する
+            sr.Write(ControlChars.Cr + ControlChars.Lf)
+        Next row
+
+        '閉じる
+        sr.Close()
+        MessageBox.Show(csvPath & "を出力しました。")
     End Sub
 
     'キャンセルボタン
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         Me.txtSyutubahyouURL.Focus()
     End Sub
+
 
     'レース取得ボタン
     Private Sub btnGetSyutubahyou_Click(sender As Object, e As EventArgs) Handles btnGetSyutubahyou.Click
@@ -418,4 +507,7 @@ Public Class ShowForm
         Me.dgvYosouRace.AllowUserToAddRows = False
     End Sub
 
+    Private Sub btnAiLogic_Click(sender As Object, e As EventArgs) Handles btnAiLogic.Click
+        Me.txtSyutubahyouURL.Focus()
+    End Sub
 End Class
